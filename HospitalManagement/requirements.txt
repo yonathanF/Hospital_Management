@@ -1,0 +1,4 @@
+coverage==4.5.1
+Django==2.0.2
+pep8==1.7.1
+pytz==2018.3
