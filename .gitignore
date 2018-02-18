@@ -11,6 +11,10 @@ __pycache__/
 myTags
 *.swp
 
+# migration files 
+*/migrations/*
+migrations/
+*/migrations
 
 # sqlite db  
 */db.sqlite3
