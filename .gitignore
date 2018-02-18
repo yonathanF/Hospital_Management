@@ -3,6 +3,19 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# IDE files 
+.idea
+*.idea
+*/.idea
+.idea/
+myTags
+*.swp
+
+
+# sqlite db  
+*/db.sqlite3
+*/db.sqlite3/*
+*.sqlite3
 
 # C extensions
 *.so
