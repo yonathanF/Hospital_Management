@@ -33,7 +33,7 @@ pip install -r requirements.txt
 - HospitalManagement --> the django application 
 - HospitalManagement/Landing --> the app for the landing page 
 - HospitalManagement/Auth --> the app for register/login pages 
-- HospitalManagement/Home --> the home app for patients 
+- HospitalManagement/Patients--> the home app for patients 
 - HospitalManagement/Hospital --> the home app for the hospital employees etc 
 
 ### Helpful commands 
