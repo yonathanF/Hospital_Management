@@ -1,3 +1,8 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
-# Create your views here.
+
+def index(request):
+    ''' renders the landing htlm page ... everything is in the html for this '''
+
+    return HttpResponse(render(request, 'Landing/index.html'))
