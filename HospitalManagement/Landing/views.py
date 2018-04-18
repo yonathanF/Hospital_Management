@@ -3,6 +3,6 @@ from django.shortcuts import render
 
 
 def index(request):
-    ''' renders the landing htlm page ... everything is in the html for this '''
+    ''' renders the landing html page ... everything is in the html for this '''
 
     return HttpResponse(render(request, 'Landing/index.html'))
