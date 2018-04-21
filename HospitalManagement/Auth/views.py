@@ -32,7 +32,7 @@ def register(request):
         # try to sign the user in
         user = authenticate(username=email, password=password)
         if user is not None:
-            return redirect('/Patient/home')
+            return redirect('/patient/home')
 
         # couldn't sign in
         context[
@@ -56,7 +56,7 @@ def signin(request):
 
         user = authenticate(username=email, password=password)
         if user is not None:
-            return redirect('/Patient/home')
+            return redirect('/patient/home')
 
             # bad creds
             context['reg_error'] = "Wrong email and/or password. Try again!"
