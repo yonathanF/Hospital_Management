@@ -1,0 +1,133 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Patient| Appts</title>
+
+    <!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Team 10</a>
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="/auth/signout">Sign out</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+		<ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/hosptial/home/">
+                                <span data-feather="home"></span> Home
+                                <span class="sr-only"></span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/hosptial/appointments/">
+                                <span data-feather="calendar">(current)</span>Appointments
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/hosptial/doctors/">
+                                <span data-feather="activity"></span>Doctors 
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/hosptial/patients/">
+                                <span data-feather="user"></span>Patients 
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/hosptial/bills">
+                                <span data-feather="mail"></span> Bills
+                            </a>
+                        </li>
+
+			<li class="nav-item">
+                            <a class="nav-link" href="/hosptial/rooms">
+                                <span data-feather="package"></span>Rooms  
+                            </a>
+                        </li>
+			<li class="nav-item">
+                            <a class="nav-link" href="/hosptial/departments">
+                                <span data-feather="users"></span>Departments
+                            </a>
+                        </li>
+			
+                    </ul>
+         </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+		  <h1 class="h2">Welcome, {{ username }}</h1>
+          </div>
+
+	  <div class="row">
+		  <h3> {{ greeting_text }} </h3>
+	  </div>
+		
+	  <div class="row">
+	 
+          <h2>Your Appointments</h2>
+          <div class="table-responsive">
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Time</th>
+      <th scope="col">Doctor</th>
+      <th scope="col">Reason</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+                  <td>Lorem</td>
+                  <td>ipsum</td>
+                  <td>dolor</td>
+                  <td>sit</td>
+
+      <td> <button class="btn btn-outline-primary"> More </button></td>
+    </tr>
+      </tbody>
+</table>
+	    
+	    <form method="get" action="/patient/new_appointments">
+ {% csrf_token %} 
+	    <button type="submit" class="btn btn-success">New Appointment </button>
+	    </form>
+
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+      </body>
+</html>
