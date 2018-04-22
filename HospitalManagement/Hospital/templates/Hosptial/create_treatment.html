@@ -13,12 +13,7 @@
   <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Team 10</a>
-      <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-          <a class="nav-link" href="/auth/signout">Sign out</a>
-        </li>
-      </ul>
-    </nav>
+          </nav>
 
     <div class="container-fluid">
       <div class="row">
@@ -72,15 +67,18 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-		  <h1 class="h2">Welcome, Admin</h1>
+		  <h1 class="h2">Treatments</h1>
           </div>
-	 
-          <h2>Update Appointment</h2>
+
+	  <div class="row">
+	  <div class="col-lg-6 card">
            
+          <h5 class="card-header">Create a treatment plan</h5>
+	  <div class="card-body">
     <form method="post" class="form-horizontal" action="/hosptial/treatment">
  {% csrf_token %}
 	</br>
-  <div class="col-6">
+  <div class="col-10">
 
 <div class="form-group">
     <label for="doctorName">Doctor Name</label>
@@ -117,10 +115,28 @@
 
 
   </br>
-  <button type="submit" class="btn btn-lg btn-primary"> Next</button>
+  <button type="submit" class="btn btn-lg btn-warning float-right"> Create</button>
   </div>
 </form>
+	  </div>
+	  </div>
 
+
+	  <div style="margin-left:15px;" class="col-lg-3 card">
+          <h5 class="card-header">Medical Information</h5>
+	  <div class="card-body">
+	            <h6 class="card-text">First Name: </h6>
+		    <h6 class="card-text">Last Name: </h6>
+		    <h6 class="card-text">Last Visit: </h6>
+		    <h6 class="card-text">Last Doctor: </h6>
+		    <h6 class="card-text">Last Treatment: </h6>
+		    <h6 class="card-text">Department: </h6>
+	  </div>
+	  </div>
+
+
+
+      </div>
         </main>
       </div>
     </div>
