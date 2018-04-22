@@ -103,9 +103,15 @@ def departments(request):
 
 
 def bills(request):
-    ''' handles the view and creation of bills '''
+    ''' just shows all the bills '''
 
     return HttpResponse(render(request, 'Hosptial/bills.html'))
+
+
+def create_bill(request, patient_id):
+    ''' handles the view and creation of bills '''
+
+    return HttpResponse(render(request, 'Hosptial/create_bill.html'))
 
 
 def delete_bill(request, bill_num):
