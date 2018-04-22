@@ -8,3 +8,9 @@ def home(request):
 
     # handle get only
     return HttpResponse(render(request, 'Hosptial/home.html'))
+
+
+def search(request):
+    ''' search for firstname, lastname, email '''
+
+    return HttpResponse(render(request, 'Hosptial/search.html'))

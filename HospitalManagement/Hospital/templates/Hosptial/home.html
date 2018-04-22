@@ -32,26 +32,46 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="/patient/home/">
+                            <a class="nav-link active" href="/hosptial/home/">
                                 <span data-feather="home"></span> Home
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link" href="/patient/appointments/">
-                                <span data-feather="calendar"></span> Appointments
+                            <a class="nav-link" href="/hosptial/appointments/">
+                                <span data-feather="calendar"></span>Appointments
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/hosptial/doctors/">
+                                <span data-feather="activity"></span>Doctors 
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/patient/medications/">
-                                <span data-feather="activity"></span> Medications
+                            <a class="nav-link" href="/hosptial/patients/">
+                                <span data-feather="user"></span>Patients 
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/patient/bills">
+                            <a class="nav-link" href="/hosptial/bills">
                                 <span data-feather="mail"></span> Bills
                             </a>
                         </li>
+
+			<li class="nav-item">
+                            <a class="nav-link" href="/hopstial/rooms">
+                                <span data-feather="package"></span>Rooms  
+                            </a>
+                        </li>
+			<li class="nav-item">
+                            <a class="nav-link" href="/hosptial/dpeartments">
+                                <span data-feather="users"></span>Departments
+                            </a>
+                        </li>
+			
                     </ul>
                 </div>
             </nav>
@@ -96,6 +116,7 @@
 		<hr>
 		<div class="col-lg-12">
 <form action="/hosptial/search/" method="post">
+ {% csrf_token %}
   <div class="form-row">
     <div class="col">
       <input type="text" name="firstName" class="form-control" placeholder="First name">
