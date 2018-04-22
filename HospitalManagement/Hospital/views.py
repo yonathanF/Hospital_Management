@@ -25,7 +25,7 @@ def appointments(request):
 def update_appointment(request, patient_id, doc_id):
     ''' handles appointments update '''
 
-    return HttpResponse(render(request, 'Hosptial/update_apt.html'))
+    return HttpResponse(render(request, 'Hosptial/update_appt.html'))
 
 
 def patients(request):
