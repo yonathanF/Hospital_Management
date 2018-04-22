@@ -38,9 +38,21 @@ def medications(request):
     # no post, handle all as get
     return HttpResponse(render(request, 'Patient/medications.html'))
 
+def drug_more(request):
+    ''' mediations info page'''
+
+    # no post, handle all as get
+    return HttpResponse(render(request, 'Patient/drug_more.html'))
+
 
 def bills(request):
     ''' shows the user profile '''
 
     # also no posts, all get
     return HttpResponse(render(request, 'Patient/bills.html'))
+
+def bills_more(request):
+    ''' shows the user profile '''
+
+    # also no posts, all get
+    return HttpResponse(render(request, 'Patient/bills_more.html'))

@@ -92,8 +92,14 @@
 
 
   </br>
-  <button type="submit" class="btn btn-lg btn-primary"> Next</button>
+  <button type="submit" class="btn btn-lg btn-primary" id="submit_new_appt"> Submit</button>
+
+
   </div>
+
+
+
+
 </form>
 
         </main>
@@ -112,6 +118,19 @@
     <script>
       feather.replace()
     </script>
+    <script>
+      // Display confirmatin mesage in alert
+      document.getElementById("submit_new_appt").addEventListener("click", function() {
+        var reason = document.getElementById("reason").value;
+        var doctor = document.getElementById("preferedDoctor").value;
+        var date = document.getElementById("preferedDate").value;
+        // var location = document.getElementById("reason").value;
+        var message = "Your appointment in " + date + " with doctor " + doctor + " is confirmed!"
+        alert( message );
+      }, false);
+    </script> 
+
+
 
       </body>
 </html>
