@@ -32,6 +32,7 @@ def register(request):
         # try to sign the user in
         user = authenticate(username=email, password=password)
         if user is not None:
+            login(request, user)
             return redirect('/patient/home')
 
         # couldn't sign in
