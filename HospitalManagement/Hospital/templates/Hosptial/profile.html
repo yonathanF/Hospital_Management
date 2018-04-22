@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Patient| Appts</title>
+    <title>Patient| Profile</title>
 
     <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -13,23 +13,28 @@
   <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Team 10</a>
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="/auth/signout">Sign out</a>
+        </li>
+      </ul>
     </nav>
 
     <div class="container-fluid">
       <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
           <div class="sidebar-sticky">
-		<ul class="nav flex-column">
+		                    <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link active" href="/hosptial/home/">
                                 <span data-feather="home"></span> Home
-                                <span class="sr-only"></span>
+                                <span class="sr-only">(current)</span>
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a class="nav-link" href="/hosptial/appointments/">
-                                <span data-feather="calendar">(current)</span>Appointments
+                                <span data-feather="calendar"></span>Appointments
                             </a>
                         </li>
 
@@ -67,65 +72,44 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-		  <h1 class="h2">Appointments</h1>
+		  <h1 class="h2">Patient Profile</h1>
           </div>
 	  <div class="row">
-	  <div class="col-lg-7 card">
-		<h5 class="card-header">Old Appointment</h5>
-		<div class="card-body">
-			<h6 class="card-text">Prefered Doctor: </h6>
-		    <h6 class="card-text">Prefered Date: </h6>
-		    <p class="card-text">Reason: </p>
-		</div>
+	  <div style="margin:10px" class="card col-lg-5"> 
 
+          <h5 class="card-header">Personal Information</h5>
+	  <div class="card-body">
+		    <h6 class="card-text">First Name: </h6>
+		    <h6 class="card-text">Last Name: </h6>
+		    <h6 class="card-text">Email: </h6>
+		    <h6 class="card-text">Address: </h6>
 	  </div>
 	  </div>
-	  </br>
-	  </br>
 
-	  <div class="row">
-	  <div class="card col-lg-7"> 
+	  <div style="margin:10px" class="card col-lg-5"> 
 
-          <h5 class="card-header">Update Appointment</h5>
-    <form method="post" class="form-horizontal" action="/hosptial/new_appointments">
-
-<div class="card-body">
- {% csrf_token %}
-	</br>
-
-<div class="form-group">
-    <label for="preferedDoctor">Prefered Doctor</label>
-    <select type="text" value="doc 8" class="form-control" id="preferedDoctor" name="preferedDoctor" required>
-	
-	    <option> doc 1 </option>
-	    <option> doc 2 </option>
-	    <option> doc 3 </option>
-	    <option> doc 4 </option>
-	    <option> doc 5 </option>
-    </select>
-  </div>
-
-
-  <div class="form-group">
-    <label for="preferedDate">Prefered Date</label>
-    <input type="date" class="form-control" id="preferedDate" name="preferedDate" required>
-  </div>
-
-  <div class="form-group">
-    <label for="reason">Reason for Appointment</label>
-    <textarea  type="text" class="form-control" id="reason" name="reason" required placeholder="Give a brief description..."></textarea>
-  </div>
-
-
-  </br>
-  <button type="submit" class="btn btn-lg btn-success float-right"> Update</button>
-  </br>
-
-  </br>
-  </div>
-</form>
-</div>
+          <h5 class="card-header">Medcial Information</h5>
+	  <div class="card-body">
+		    <h6 class="card-text">Last Visit: </h6>
+		    <h6 class="card-text">Last Doctor: </h6>
+		    <h6 class="card-text">Last Treatment: </h6>
+		    <h6 class="card-text">Department: </h6>
+		    <h6 class="card-text">Unpaid Bill Amount: </h6>
 	  </div>
+
+	  </div>
+
+	  </div>
+	  <div style="margin:7px; margin-left:30px" class="row">
+		  <div class="col-lg-4">
+     <a href="/hosptial/bills/" class="btn btn-block btn-primary"> Create Bill</a> 
+		  </div>
+
+<div class="col-lg-4">
+     <a href="/hosptial/treatment/1/" class="btn btn-block btn-warning"> Add Treatment</a> 
+		  </div>
+	  </div>
+ 
         </main>
       </div>
     </div>

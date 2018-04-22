@@ -13,6 +13,11 @@
   <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Team 10</a>
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="/auth/signout">Sign out</a>
+        </li>
+      </ul>
     </nav>
 
     <div class="container-fluid">
@@ -67,35 +72,19 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-		  <h1 class="h2">Appointments</h1>
+		  <h1 class="h2">Welcome, Admin</h1>
           </div>
-	  <div class="row">
-	  <div class="col-lg-7 card">
-		<h5 class="card-header">Old Appointment</h5>
-		<div class="card-body">
-			<h6 class="card-text">Prefered Doctor: </h6>
-		    <h6 class="card-text">Prefered Date: </h6>
-		    <p class="card-text">Reason: </p>
-		</div>
-
-	  </div>
-	  </div>
-	  </br>
-	  </br>
-
-	  <div class="row">
-	  <div class="card col-lg-7"> 
-
-          <h5 class="card-header">Update Appointment</h5>
-    <form method="post" class="form-horizontal" action="/hosptial/new_appointments">
-
-<div class="card-body">
+	 
+          <h2>Update Appointment</h2>
+           
+    <form method="post" class="form-horizontal" action="/hosptial/treatment">
  {% csrf_token %}
 	</br>
+  <div class="col-6">
 
 <div class="form-group">
-    <label for="preferedDoctor">Prefered Doctor</label>
-    <select type="text" value="doc 8" class="form-control" id="preferedDoctor" name="preferedDoctor" required>
+    <label for="doctorName">Doctor Name</label>
+    <select type="text" class="form-control" id="doctorName" name="doctorName" required>
 	
 	    <option> doc 1 </option>
 	    <option> doc 2 </option>
@@ -105,27 +94,33 @@
     </select>
   </div>
 
-
   <div class="form-group">
-    <label for="preferedDate">Prefered Date</label>
-    <input type="date" class="form-control" id="preferedDate" name="preferedDate" required>
+    <label for="aliment">Aliment</label>
+    <input type="text" class="form-control" id="aliment" name="aliment" required>
   </div>
 
+<div class="form-group">
+    <label for="pdate">Prescription Date</label>
+    <input type="date" class="form-control" id="pdate" name="pdate" required>
+  </div>
+
+<div class="form-group">
+    <label for="expected">Expected Outcome from treatment</label>
+    <textarea type="text" class="form-control" id="expected" name="expected" required></textarea>
+  </div>
+
+
   <div class="form-group">
-    <label for="reason">Reason for Appointment</label>
-    <textarea  type="text" class="form-control" id="reason" name="reason" required placeholder="Give a brief description..."></textarea>
+    <label for="warnings">Warnings</label>
+    <textarea type="text" class="form-control" id="warnings" name="warnings" required placeholder="Give a brief description..."></textarea>
   </div>
 
 
   </br>
-  <button type="submit" class="btn btn-lg btn-success float-right"> Update</button>
-  </br>
-
-  </br>
+  <button type="submit" class="btn btn-lg btn-primary"> Next</button>
   </div>
 </form>
-</div>
-	  </div>
+
         </main>
       </div>
     </div>

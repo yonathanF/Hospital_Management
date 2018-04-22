@@ -13,19 +13,69 @@ def home(request):
 def search(request):
     ''' search for firstname, lastname, email '''
 
-    return HttpResponse(render(request, 'Hosptial/search.html'))
+    # handle post
+    if request.method == 'POST':
+
+        # get data
+
+        first_name = request.POST.get("firstName", "")
+        last_name = request.POST.get("lastName", "")
+        email = request.POST.get("email", "")
+
+        if first_name and last_name and email:
+            pass  # call function with all args
+        elif first_name and last_name:
+            pass  # call function with two args
+        elif email:
+            pass  # call with email only
+        elif first_name:
+            pass  # call w/ fname only
+        elif last_name:
+            pass  # call w/ lname only
+
+        # reorganize data and pass as context
+        return HttpResponse(render(request, 'Hosptial/search.html'))
+
+    else:
+        return HttpResponse(render(request, 'Hosptial/search.html'))
 
 
 def appointments(request):
     ''' handles appointments '''
 
+    # get all appointments
     return HttpResponse(render(request, 'Hosptial/appointments.html'))
+
+
+def profile(request, patient_id):
+    ''' shows patient profile '''
+
+    return HttpResponse(render(request, 'Hosptial/profile.html'))
+
+
+def treatment(request, patient_id):
+    ''' Handles treatment stuff '''
+
+    # handle post, redirect to patient profile
+    if request.method == 'POST':
+
+        redirect('/hosptial/profile/' + patient_id)
+
+    else:
+        return HttpResponse(render(request, 'Hosptial/create_treatment.html'))
 
 
 def update_appointment(request, patient_id, doc_id):
     ''' handles appointments update '''
 
-    return HttpResponse(render(request, 'Hosptial/update_appt.html'))
+    # handle get
+    if request.method == 'GET':
+        # get old apt data and pass it as context
+        return HttpResponse(render(request, 'Hosptial/update_appt.html'))
+
+    else:
+        prefered_doctor = request.POST.get("firstName", "")
+        return HttpResponse(render(request, 'Hosptial/update_appt.html'))
 
 
 def patients(request):
