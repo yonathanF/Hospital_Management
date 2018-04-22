@@ -1,0 +1,147 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Patient| Appts</title>
+
+    <!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Team 10</a>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+		<ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/hosptial/home/">
+                                <span data-feather="home"></span> Home
+                                <span class="sr-only"></span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/hosptial/appointments/">
+                                <span data-feather="calendar">(current)</span>Appointments
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/hosptial/doctors/">
+                                <span data-feather="activity"></span>Doctors 
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/hosptial/patients/">
+                                <span data-feather="user"></span>Patients 
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/hosptial/bills">
+                                <span data-feather="mail"></span> Bills
+                            </a>
+                        </li>
+
+			<li class="nav-item">
+                            <a class="nav-link" href="/hosptial/rooms">
+                                <span data-feather="package"></span>Rooms  
+                            </a>
+                        </li>
+			<li class="nav-item">
+                            <a class="nav-link" href="/hosptial/departments">
+                                <span data-feather="users"></span>Departments
+                            </a>
+                        </li>
+			
+                    </ul>
+         </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+		  <h1 class="h2">Appointments</h1>
+          </div>
+	  <div class="row">
+	  <div class="col-lg-7 card">
+		<h5 class="card-header">Old Appointment</h5>
+		<div class="card-body">
+			<h6 class="card-text">Prefered Doctor: </h6>
+		    <h6 class="card-text">Prefered Date: </h6>
+		    <p class="card-text">Reason: </p>
+		</div>
+
+	  </div>
+	  </div>
+	  </br>
+	  </br>
+
+	  <div class="row">
+	  <div class="card col-lg-7"> 
+
+          <h5 class="card-header">Update Appointment</h5>
+    <form method="post" class="form-horizontal" action="/hosptial/new_appointments">
+
+<div class="card-body">
+ {% csrf_token %}
+	</br>
+
+<div class="form-group">
+    <label for="preferedDoctor">Prefered Doctor</label>
+    <select type="text" value="doc 8" class="form-control" id="preferedDoctor" name="preferedDoctor" required>
+	
+	    <option> doc 1 </option>
+	    <option> doc 2 </option>
+	    <option> doc 3 </option>
+	    <option> doc 4 </option>
+	    <option> doc 5 </option>
+    </select>
+  </div>
+
+
+  <div class="form-group">
+    <label for="preferedDate">Prefered Date</label>
+    <input type="date" class="form-control" id="preferedDate" name="preferedDate" required>
+  </div>
+
+  <div class="form-group">
+    <label for="reason">Reason for Appointment</label>
+    <textarea  type="text" class="form-control" id="reason" name="reason" required placeholder="Give a brief description..."></textarea>
+  </div>
+
+
+  </br>
+  <button type="submit" class="btn btn-lg btn-success float-right"> Update</button>
+  </br>
+
+  </br>
+  </div>
+</form>
+</div>
+	  </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+      </body>
+</html>
