@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -56,6 +56,7 @@ def signin(request):
 
         user = authenticate(username=email, password=password)
         if user is not None:
+            login(request, user)
             return redirect('/patient/home')
 
             # bad creds
@@ -72,3 +73,9 @@ def signin(request):
     # not a post request, just send the page
     else:
         return HttpResponse(render(request, 'Auth/signin.html'))
+
+
+def signout(request):
+    ''' sign out the current user '''
+    logout(request)
+    return redirect('/auth/signin')

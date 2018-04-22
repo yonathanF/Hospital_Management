@@ -5,7 +5,9 @@ from django.shortcuts import redirect, render
 
 def home(request):
     ''' a patient private home page '''
-    return HttpResponse(render(request, 'Patient/home.html'))
+    context = {}
+    context['username'] = request.user.first_name
+    return HttpResponse(render(request, 'Patient/home.html', context))
 
 
 def appointments(request):
@@ -24,7 +26,7 @@ def new_appointments(request):
         reason = request.POST.get("reason", "")
 
         #TODO insert into db
-        return redirect("/patient/home/")
+        return redirect("/patient/appointments/")
 
     else:
         return HttpResponse(render(request, 'Patient/new_appt.html'))
