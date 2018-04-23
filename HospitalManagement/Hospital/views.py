@@ -55,7 +55,11 @@ def appointments(request):
 def profile(request, patient_id):
     ''' shows patient profile '''
 
-    return HttpResponse(render(request, 'Hosptial/profile.html'))
+    # get the data for that id
+    patient_profile = view_history(patient_id)
+    context = {"profile": patient_profile[0]}
+
+    return HttpResponse(render(request, 'Hosptial/profile.html', context))
 
 
 def treatment(request, patient_id):

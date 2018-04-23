@@ -470,14 +470,11 @@ def view_history(PatientID):
     except ConnectionError:
         print("Unable to connect to database!")
 
-    try:
-        sql_view_history = (
-            """CREATE OR REPLACE ALGORITHM = MERGE VIEW view_history AS SELECT * FROM treatments join Patient ON PatientID WHERE PatientID = %s"""
-        )
-        cursor.execute(sql_view_history, [PatientID])
-        conn.commit()
-    except ViewCreationError:
-        print("View Creation failed!")
+    sql_view_history = (
+        """CREATE OR REPLACE ALGORITHM = MERGE VIEW view_history AS SELECT * FROM Treatments join patient ON PatientID WHERE PatientID = %s"""
+    )
+    cursor.execute(sql_view_history, [PatientID])
+    conn.commit()
 
     cursor.execute("SELECT * FROM view_history")
     r = cursor.fetchall()

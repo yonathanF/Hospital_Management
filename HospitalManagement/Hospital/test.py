@@ -13,4 +13,5 @@ from HospitalDBConnect import *
 #print(view_Doctors())
 #print(view_Bills())
 #print(view_Appointments())
-print(view_Patients())
+#print(view_Patients())
+print(view_history(104))

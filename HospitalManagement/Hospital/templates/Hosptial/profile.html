@@ -79,10 +79,10 @@
 
           <h5 class="card-header">Personal Information</h5>
 	  <div class="card-body">
-		    <h6 class="card-text">First Name: </h6>
-		    <h6 class="card-text">Last Name: </h6>
-		    <h6 class="card-text">Email: </h6>
-		    <h6 class="card-text">Address: </h6>
+		  <h6 class="card-text"><b>First Name:</b> {{profile.FirstName }} </h6>
+		  <h6 class="card-text"><b> Last Name:</b> {{profile.LastName }} </h6>
+		  <h6 class="card-text"><b> Phone:</b> {{profile.Phone}}</h6>
+		  <h6 class="card-text"><b> Address:</b> {{profile.Address}} </h6>
 	  </div>
 	  </div>
 
@@ -90,11 +90,10 @@
 
           <h5 class="card-header">Medcial Information</h5>
 	  <div class="card-body">
-		    <h6 class="card-text">Last Visit: </h6>
-		    <h6 class="card-text">Last Doctor: </h6>
-		    <h6 class="card-text">Last Treatment: </h6>
-		    <h6 class="card-text">Department: </h6>
-		    <h6 class="card-text">Unpaid Bill Amount: </h6>
+		  <h6 class="card-text"><b> Last Treatment:</b> {{profile.Ailment }} </h6>
+		  <h6 class="card-text"><b> Warning for Treatment:</b>  {{profile.Warnings}}</h6>
+		  <h6 class="card-text"><b> Expected Outcome:</b> {{profile.ExpectedOutcome }} </h6>
+		  <h6 class="card-text"><b> Prescription Date:</b> {{profile.PrescriptionDate}} </h6>
 	  </div>
 
 	  </div>
