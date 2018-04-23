@@ -71,7 +71,7 @@
       <th scope="col">Medicine Name</th>
       <th scope="col">Prescribed By</th>
       <th scope="col">Prescription Date</th>
-      <th scope="col">Expected Outcome</th>
+      <!-- <th scope="col">Expected Outcome</th> -->
       <th scope="col"></th>
     </tr>
   </thead>
@@ -80,11 +80,11 @@
     <tr>
       <td>{{ treatment.TreatmentID }}</td>
       <td>{{ treatment.Ailment }}</td>
-      <td>{{ treatment.DoctorID }}</td>
+      <td>{{ treatment.DocID }}</td>
       <td>{{ treatment.PrescriptionDate }}</td>
-      <td>{{ treatment.ExpectedOutcome }}</td>
+      <!-- <td>{{ treatment.ExpectedOutcome }}</td> -->
       <td>
-          <a class="btn btn-info" href="/patient/drug_more" role ="button">
+          <a class="btn btn-info" href="/patient/drug_more/{{ treatment.TreatmentID }}" role ="button">
           More 
           </a>
       </td>

@@ -55,14 +55,13 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-		  <h1 class="h2">Welcome, {{ username }}</h1>
           </div>
 
 	  <div class="row">
       <div class="container-fluid">
           <h2>
             <span>
-            Your Treatment: {{drugname}}
+            Your Treatment: {{treatment.TreatmentID}}
             </span>
             <a class="btn btn-primary float-right" href="/patient/medications" role ="button"> Back  </a>
           </h2> 
@@ -73,20 +72,24 @@
 <table class="table">
     <tbody>
         <tr>
-          <th style="width:200px">Treatment Name</th>
-            <td>drug </td>
+          <th style="width:200px">Ailment</th>
+            <td>{{treatment.TreatmentID}} </td>
         </tr>
         <tr>
-          <th>Treatment ID</th>
-            <td>123534</td>
+          <th>Doctor</th>
+            <td>{{treatment.DocID}}</td>
         </tr>
         <tr>
-          <th>Expiration Date</th>
-            <td>4/30/2019</td>
+          <th>Prescription Date</th>
+            <td>{{treatment.PrescriptionDate}}</td>
+        </tr>
+        <tr>
+          <th>Expected Outcome</th>
+            <td>{{treatment.ExpectedOutcome}}</td>
         </tr>
       <tr>
-          <th>Used for</th>
-            <td>cancer</td>
+          <th>Warnings</th>
+            <td>{{treatment.Warnings}}</td>
         </tr>
     </tbody>
 </table>

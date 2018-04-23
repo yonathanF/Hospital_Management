@@ -62,7 +62,7 @@
       <div class="container-fluid">
           <h2>
             <span>
-            Your Bill: {{billnumber}}
+            Your Bill: {{bill.BillNumber}}
             </span>
             <a class="btn btn-primary float-right" href="/patient/bills" role ="button"> Back  </a>
           </h2> 
@@ -72,23 +72,23 @@
     <tbody>
         <tr>
           <th style="width:200px">Bill Number</th>
-            <td>A434df </td>
+            <td>{{bill.BillNumber}} </td>
         </tr>
         <tr>
           <th>Due Date</th>
-            <td>4/30/2019</td>
+            <td>{{bill.DueDate}}</td>
         </tr>
         <tr>
           <th>Release Date</th>
-            <td>4/20/2018</td>
+            <td>{{bill.ReleaseDate}}</td>
         </tr>
       <tr>
           <th>Amount</th>
-            <td>$500</td>
+            <td>{{bill.Amount}}</td>
         </tr>
       <tr>
           <th>Description</th>
-          <td>Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</td>
+          <td>{{bill.Description}}</td>
         </tr>
     </tbody>
 </table>

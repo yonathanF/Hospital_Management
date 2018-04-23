@@ -13,7 +13,9 @@ def home(request):
 
 def appointments(request):
     ''' handles the creation and display of appts '''
-    all_appointments = view_Appointments()
+    PatientID = request.user.id
+    all_appointments = view_Appointments_patient(PatientID)
+    print(all_appointments)
     context = {'appts': all_appointments}
 
     return HttpResponse(render(request, 'Patient/appt.html', context))
@@ -43,13 +45,16 @@ def medications(request):
     context = {'treatments': all_treatments}
 
     # no post, handle all as get
-    return HttpResponse(render(request, 'Patient/medications.html'))
+    return HttpResponse(render(request, 'Patient/medications.html', context))
 
-def drug_more(request):
+def drug_more(request, treatmentNumber):
     ''' mediations info page'''
 
+    all_treatments = view_Treatment_more(treatmentNumber)
+    # print (all_bills)
+    context = {'treatment': all_treatments[0]}
     # no post, handle all as get
-    return HttpResponse(render(request, 'Patient/drug_more.html'))
+    return HttpResponse(render(request, 'Patient/drug_more.html', context))
 
 
 def bills(request):
@@ -60,8 +65,10 @@ def bills(request):
     context = {'bills': all_bills}
     return HttpResponse(render(request, 'Patient/bills.html', context))
 
-def bills_more(request):
+def bills_more(request, billNumber):
     ''' shows the user profile '''
 
-    # also no posts, all get
-    return HttpResponse(render(request, 'Patient/bills_more.html'))
+    all_bills = view_Bill_more(billNumber)
+    # print (all_bills)
+    context = {'bill': all_bills[0]}
+    return HttpResponse(render(request, 'Patient/bills_more.html', context))
