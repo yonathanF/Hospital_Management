@@ -81,22 +81,21 @@
 <table class="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">First name</th>
-      <th scope="col">Last name</th>
-      <th scope="col">Last Appt</th>
-      <th scope="col"></th>
+      <th scope="col">Patient Name</th>
+      <th scope="col">Doctor Name </th>
+      <th scope="col">Appointment Date</th>
+      <th scope="col">Reason</th>
     </tr>
   </thead>
   <tbody>
+	  {% for appt in appts %}
     <tr>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>01/02/2018</td>
-      <td>  <a href="/hosptial/update_appointment/1/1/" class="btn btn-outline-success"> Update</a> 
-  </td>
-
+	    <td>{{ appt.PatientID }}</td>
+	    <td>{{ appt.DocID }}</td>
+	    <td>{{ appt.ApptDate }}</td>
+	    <td>{{ appt.Reason }}</td>
     </tr>
-
+	    {% endfor %}
   </tbody>
 </table>
 		</div>

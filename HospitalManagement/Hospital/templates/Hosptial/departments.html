@@ -82,20 +82,19 @@
 <table class="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">First name</th>
-      <th scope="col">Last name</th>
-      <th scope="col">Last Appt</th>
-      <th scope="col"></th>
+      <th scope="col">Department Name</th>
+      <th scope="col">Department Head</th>
+      <th scope="col">Department Description</th>
     </tr>
   </thead>
   <tbody>
+	  {% for dept in departments %}
     <tr>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>01/02/2018</td>
-      <td> <button class="btn btn-outline-primary"> More </button></td>
+	    <td>{{ dept.DeptName }}</td>
+	    <td>{{ dept.DeptHead }}</td>
+	    <td>{{ dept.DeptDesc }}</td>
     </tr>
-
+    {% endfor %}
   </tbody>
 </table>
 

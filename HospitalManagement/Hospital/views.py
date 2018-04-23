@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
+from .HospitalDBConnect import *
+
 
 def home(request):
     ''' the home for hosptial admins '''
@@ -44,7 +46,10 @@ def appointments(request):
     ''' handles appointments '''
 
     # get all appointments
-    return HttpResponse(render(request, 'Hosptial/appointments.html'))
+    all_appointments = view_Appointments()
+    context = {'appts': all_appointments}
+
+    return HttpResponse(render(request, 'Hosptial/appointments.html', context))
 
 
 def profile(request, patient_id):
@@ -80,32 +85,50 @@ def update_appointment(request, patient_id, doc_id):
 
 def patients(request):
     ''' shows all patients and leads to profile '''
+    # get data
+    all_patients = view_Patients()
+    context = {'patients': all_patients}
 
-    return HttpResponse(render(request, 'Hosptial/patients.html'))
+    return HttpResponse(render(request, 'Hosptial/patients.html', context))
 
 
 def doctors(request):
     ''' shows all doctors and their info '''
 
-    return HttpResponse(render(request, 'Hosptial/doctors.html'))
+    # get all the data
+    all_doctors = view_Doctors()
+    context = {'doctors': all_doctors}
+    return HttpResponse(render(request, 'Hosptial/doctors.html', context))
 
 
 def rooms(request):
     ''' shows info about rooms: handles get only '''
 
-    return HttpResponse(render(request, 'Hosptial/rooms.html'))
+    # get all data and set context
+    all_rooms = view_Rooms()
+    context = {'rooms': all_rooms}
+
+    return HttpResponse(render(request, 'Hosptial/rooms.html', context))
 
 
 def departments(request):
     ''' shows dep info: handles get only '''
+    # get data
+    all_departments = view_Departments()
 
-    return HttpResponse(render(request, 'Hosptial/departments.html'))
+    context = {'departments': all_departments}
+
+    return HttpResponse(render(request, 'Hosptial/departments.html', context))
 
 
 def bills(request):
     ''' just shows all the bills '''
 
-    return HttpResponse(render(request, 'Hosptial/bills.html'))
+    # get all the data
+    all_bills = view_Bills()
+    context = {'bills': all_bills}
+
+    return HttpResponse(render(request, 'Hosptial/bills.html', context))
 
 
 def create_bill(request, patient_id):

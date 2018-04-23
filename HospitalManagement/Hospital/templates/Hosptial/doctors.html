@@ -57,12 +57,12 @@
                         </li>
 
 			<li class="nav-item">
-                            <a class="nav-link" href="/hopstial/rooms">
+                            <a class="nav-link" href="/hosptial/rooms">
                                 <span data-feather="package"></span>Rooms  
                             </a>
                         </li>
 			<li class="nav-item">
-                            <a class="nav-link" href="/hosptial/dpeartments">
+                            <a class="nav-link" href="/hosptial/departments">
                                 <span data-feather="users"></span>Departments
                             </a>
                         </li>
@@ -83,18 +83,23 @@
     <tr>
       <th scope="col">First name</th>
       <th scope="col">Last name</th>
-      <th scope="col">Last Appt</th>
-      <th scope="col"></th>
+      <th scope="col">Address</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Email</th>
+      <th scope="col">Salary</th>
     </tr>
   </thead>
   <tbody>
+	  {% for doc in doctors %}
     <tr>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>01/02/2018</td>
-      <td> <button class="btn btn-outline-primary"> More </button></td>
+	    <td>{{ doc.FirstName }}</td>
+	    <td>{{ doc.LastName }}</td>
+	    <td>{{ doc.Address }}</td>
+	    <td>{{ doc.Phone }}</td>
+	    <td>{{ doc.Email}}</td>
+	    <td>${{ doc.Salary}}</td>
     </tr>
-
+    {% endfor %}
   </tbody>
 </table>
 

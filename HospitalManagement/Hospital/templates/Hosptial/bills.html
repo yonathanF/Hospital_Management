@@ -79,12 +79,14 @@
     </tr>
   </thead>
   <tbody>
+	  {% for bill in bills %}
     <tr>
-      <td>1234</td>
-      <td>10/12/2018</td>
-      <td>$500</td>
+	    <td>{{ bill.BillNumber }}</td>
+	    <td>{{bill.DueDate }}</td>
+	    <td>${{ bill.Amount}}</td>
       <td> <button class="btn btn-outline-primary"> More </button></td>
     </tr>
+    {% endfor %}
   </tbody>
 </table>
 
