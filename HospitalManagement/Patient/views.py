@@ -8,6 +8,13 @@ def home(request):
     ''' a patient private home page '''
     context = {}
     context['username'] = request.user.first_name
+    context['user_id'] = request.user.id
+    context['fullname'] = request.user.first_name + " " +  request.user.last_name
+    context['email'] = request.user.email
+    if  request.user.is_staff:
+        context['type'] = "Staff"
+    else:
+        context['type'] = "Patient"
     return HttpResponse(render(request, 'Patient/home.html', context))
 
 
