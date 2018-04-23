@@ -58,32 +58,37 @@
 		  <h1 class="h2">Welcome, {{ username }}</h1>
           </div>
 
-	
 	  <div class="row">
-	 
-          <h2>{{drugname}}</h2>
-	 <div class="table-responsive">
+      <div class="container-fluid">
+          <h2>
+            <span>
+            Your Treatment: {{drugname}}
+            </span>
+            <a class="btn btn-primary float-right" href="/patient/medications" role ="button"> Back  </a>
+          </h2> 
+      </div>
+      <!-- <td> <button class="btn btn-outline-primary"> More </button> </td> -->
+	 <!-- <div class="table-responsive"> -->
 
-<table class="table thead-dark">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Drug Name</th>
-      <th scope="col">Drug ID</th>
-      <th scope="col">Manufactured Date</th>
-      <th scope="col">Expiration Date</th>
-      <th scope="col">Used for</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Lorem</td>
-      <td>ipsum</td>
-      <td>dolor</td>
-      <td>sit</td>
-		  <!-- <td> <button class="btn btn-outline-primary"> More </button> </td> -->
-    </tr>
-     </tbody>
+<table class="table">
+    <tbody>
+        <tr>
+          <th style="width:200px">Treatment Name</th>
+            <td>drug </td>
+        </tr>
+        <tr>
+          <th>Treatment ID</th>
+            <td>123534</td>
+        </tr>
+        <tr>
+          <th>Expiration Date</th>
+            <td>4/30/2019</td>
+        </tr>
+      <tr>
+          <th>Used for</th>
+            <td>cancer</td>
+        </tr>
+    </tbody>
 </table>
    	      
       </div>

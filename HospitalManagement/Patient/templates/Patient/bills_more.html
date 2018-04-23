@@ -57,40 +57,43 @@
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
 		  <h1 class="h2">Welcome, {{ username }}</h1>
           </div>
-	  <h2> Your Bills </h2>
+	  <!-- <h2> Your Bill: {{billnumber}}</h2> -->
+    <div class="row">
+      <div class="container-fluid">
+          <h2>
+            <span>
+            Your Bill: {{billnumber}}
+            </span>
+            <a class="btn btn-primary float-right" href="/patient/bills" role ="button"> Back  </a>
+          </h2> 
+      </div>
+
 <table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Bill Number</th>
-      <th scope="col">Due Date</th>
-      <th scope="col">Release Date</th>
-      <th scope="col">Amount</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1234</td>
-      <td>10/12/2018</td>
-      <td>9/12/2018</td>
-      <td>$500</td>
-      
-    </tr>
-  </tbody>
-</table>
-<table class="table">
-  <thead class="thead-light">
-    <tr>
-      <th scope="col">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</td>
-    </tr>
-  </tbody>
+    <tbody>
+        <tr>
+          <th style="width:200px">Bill Number</th>
+            <td>A434df </td>
+        </tr>
+        <tr>
+          <th>Due Date</th>
+            <td>4/30/2019</td>
+        </tr>
+        <tr>
+          <th>Release Date</th>
+            <td>4/20/2018</td>
+        </tr>
+      <tr>
+          <th>Amount</th>
+            <td>$500</td>
+        </tr>
+      <tr>
+          <th>Description</th>
+          <td>Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</td>
+        </tr>
+    </tbody>
 </table>
 
+      </div>
         </main>
       </div>
     </div>
