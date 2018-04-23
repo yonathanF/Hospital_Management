@@ -12,10 +12,10 @@ Created on Sun Apr 22 18:42:10 2018
 
 def InsertPatient(PatientID, First_Name, Last_Name, PhoneNumber, Address):
     try:
-        import MySQLdb
-        conn = MySQLdb.connect(
+        import pymysql.cursors
+        conn = pymysql.connect(
             host="localhost", user="root", passwd="pass", db="Hospital")
-        cursor = conn.cursor()
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
     except ConnectionError:
         print("Unable to connect to database")
 
@@ -35,10 +35,10 @@ def InsertPatient(PatientID, First_Name, Last_Name, PhoneNumber, Address):
 
 def InsertDoctor(DocID, FirstName, LastName, Address, Phone, Email, Salary):
     try:
-        import MySQLdb
-        conn = MySQLdb.connect(
+        import pymysql.cursors
+        conn = pymysql.connect(
             host="Localhost", user="root", passwd="pass", db="Hospital")
-        cursor = conn.cursor()
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
     except ConnectionError:
         print("Unable to connect")
 
@@ -58,10 +58,10 @@ def InsertDoctor(DocID, FirstName, LastName, Address, Phone, Email, Salary):
 
 def InsertAppt(PatientID, DocID, Date, Reason):
     try:
-        import MySQLdb
-        conn = MySQLdb.connect(
+        import pymysql.cursors
+        conn = pymysql.connect(
             host="Localhost", user="root", passwd="pass", db="Hospital")
-        cursor = conn.cursor()
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
     except ConnectionError:
         print("Unable to connect to database")
 
@@ -81,10 +81,10 @@ def InsertAppt(PatientID, DocID, Date, Reason):
 
 def view_Appointment(PatientID):
     try:
-        import MySQLdb
-        conn = MySQLdb.connect(
+        import pymysql.cursors
+        conn = pymysql.connect(
             host="Localhost", user="root", passwd="pass", db="Hospital")
-        cursor = conn.cursor()
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
     except ConnectionError:
         print("Unable to connect to database")
 
@@ -117,10 +117,10 @@ def view_Appointment(PatientID):
 
 def Update_Appointment(PatientID, NewDocID, NewApptDate):
     try:
-        import MySQLdb
-        conn = MySQLdb.connect(
+        import pymysql.cursors
+        conn = pymysql.connect(
             host="Localhost", user="root", passwd="pass", db="Hospital")
-        cursor = conn.cursor()
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
     except ConnectionError:
         print("Unable to connect to database")
 
@@ -136,6 +136,29 @@ def Update_Appointment(PatientID, NewDocID, NewApptDate):
 #Test function
 #Update_Appointment(172, 'Doc25', '2018-05-31')
 #############################################################################################################################
+''' shows all appointments '''
+
+
+def view_Appointments():
+    try:
+        import pymysql.cursors
+        conn = pymysql.connect(
+            host="Localhost", user="root", passwd="pass", db="Hospital")
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+    except ConnectionError:
+        print("Unable to connect to database")
+
+    sql_createView = "CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Appointment AS SELECT * FROM Appointment"
+    cursor.execute(sql_createView)
+    conn.commit()
+
+    cursor.execute("SELECT * FROM view_Appointment")
+    r = cursor.fetchall()
+
+    conn.rollback()
+    conn.close()
+    return r
+
 
 "This block inserts Treatment into treatment record into database"
 
@@ -143,10 +166,10 @@ def Update_Appointment(PatientID, NewDocID, NewApptDate):
 def InsertTreatment(TreatmentID, Ailment, PrescriptionDate, ExpectedOutcome,
                     warnings):
     try:
-        import MySQLdb
-        conn = MySQLdb.connect(
+        import pymysql.cursors
+        conn = pymysql.connect(
             host="Localhost", user="root", passwd="pass", db="Hospital")
-        cursor = conn.cursor()
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
     except ConnectionError:
         print("Unable to connect to database")
 
@@ -168,10 +191,10 @@ def InsertTreatment(TreatmentID, Ailment, PrescriptionDate, ExpectedOutcome,
 def InsertBill(PatientID, BillNumber, ReleaseDate, Amount, Description,
                DueDate):
     try:
-        import MySQLdb
-        conn = MySQLdb.connect(
+        import pymysql.cursors
+        conn = pymysql.connect(
             host="Localhost", user="root", passwd="pass", db="Hospital")
-        cursor = conn.cursor()
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
     except ConnectionError:
         print("Unable to connect to database")
 
@@ -193,10 +216,10 @@ def InsertBill(PatientID, BillNumber, ReleaseDate, Amount, Description,
 def view_Bill(PatientID):
 
     try:
-        import MySQLdb
-        conn = MySQLdb.connect(
+        import pymysql.cursors
+        conn = pymysql.connect(
             host="Localhost", user="root", passwd="pass", db="Hospital")
-        cursor = conn.cursor()
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
     except ConnectionError:
         print("Unable to connect to database")
 
@@ -206,13 +229,12 @@ def view_Bill(PatientID):
     cursor.execute(sql_createView, [Patient])
     conn.commit()
 
-    conn.query("SELECT * FROM view_Bills WHERE PatientID = %s" % Patient)
-    r = conn.store_result()
-    Bills = r.fetch_row(maxrows=100, how=1)
+    cursor.execute("SELECT * FROM view_Bills WHERE PatientID = %s" % Patient)
+    r = cursor.fetchall()
 
     conn.rollback()
     conn.close()
-    return Bills
+    return r
 
 
 #Test function
@@ -224,10 +246,10 @@ def view_Bill(PatientID):
 
 def DeleteBill(BillNumber):
     try:
-        import MySQLdb
-        conn = MySQLdb.connect(
+        import pymysql.cursors
+        conn = pymysql.connect(
             host="Localhost", user="root", passwd="pass", db="Hospital")
-        cursor = conn.cursor()
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
     except ConnectionError:
         print("Unable to connect to database")
 
@@ -246,10 +268,10 @@ def DeleteBill(BillNumber):
 
 def view_Doctors():
     try:
-        import MySQLdb
-        conn = MySQLdb.connect(
+        import pymysql.cursors
+        conn = pymysql.connect(
             host="Localhost", user="root", passwd="pass", db="Hospital")
-        cursor = conn.cursor()
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
     except ConnectionError:
         print("Unable to connect to database")
 
@@ -257,18 +279,40 @@ def view_Doctors():
     cursor.execute(sql_createView)
     conn.commit()
 
-    conn.query("SELECT * FROM view_Doctors")
-    r = conn.store_result()
-    Doctors = r.fetch_row(maxrows=100, how=1)
+    cursor.execute("SELECT * FROM view_Doctors")
+    r = cursor.fetchall()
 
     conn.rollback()
     conn.close()
-    return Doctors
+    return r
 
 
 #Test function
 #view_Doctors()
 #############################################################################################################################
+'''Creates a list of bills '''
+
+
+def view_Bills():
+    try:
+        import pymysql.cursors
+        conn = pymysql.connect(
+            host="Localhost", user="root", passwd="pass", db="Hospital")
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+    except ConnectionError:
+        print("Unable to connect to database")
+
+    sql_createView = "CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Bills AS SELECT * FROM Bill"
+    cursor.execute(sql_createView)
+    conn.commit()
+
+    cursor.execute("SELECT * FROM view_Bills")
+    r = cursor.fetchall()
+
+    conn.rollback()
+    conn.close()
+    return r
+
 
 "This block creates view of Nurses"
 
@@ -276,10 +320,10 @@ def view_Doctors():
 def view_Nurses():
 
     try:
-        import MySQLdb
-        conn = MySQLdb.connect(
+        import pymysql.cursors
+        conn = pymysql.connect(
             host="Localhost", user="root", passwd="pass", db="Hospital")
-        cursor = conn.cursor()
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
     except ConnectionError:
         print("Unable to connect to database")
 
@@ -287,13 +331,12 @@ def view_Nurses():
     cursor.execute(sql_createView)
     conn.commit()
 
-    conn.query("SELECT * FROM view_Nurses")
-    r = conn.store_result()
-    Nurses = r.fetch_row(maxrows=100, how=1)
+    cursor.execute("SELECT * FROM view_Nurses")
+    r = cursor.fetchall()
 
     conn.rollback()
     conn.close()
-    return Nurses
+    return r
 
 
 #Test function
@@ -306,10 +349,11 @@ def view_Nurses():
 def view_Rooms():
 
     try:
-        import MySQLdb
-        conn = MySQLdb.connect(
-            host="Localhost", user="root", passwd="pass", db="Hospital")
-        cursor = conn.cursor()
+        import pymysql.cursors
+        #import _mysql
+        conn = pymysql.connect(
+            host="localhost", user="root", passwd="pass", db="Hospital")
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
     except ConnectionError:
         print("Unable to connect to database")
 
@@ -317,13 +361,13 @@ def view_Rooms():
     cursor.execute(sql_createView)
     conn.commit()
 
-    conn.query("SELECT * FROM view_Rooms")
-    r = conn.store_result()
-    Rooms = r.fetch_row(maxrows=100, how=1)
+    cursor.execute("SELECT * FROM view_Rooms")
+    cursor.execute("SELECT * FROM view_Rooms")
+    r = cursor.fetchall()
 
     conn.rollback()
     conn.close()
-    return Rooms
+    return r
 
 
 #Test function
@@ -336,10 +380,10 @@ def view_Rooms():
 def view_Employees():
 
     try:
-        import MySQLdb
-        conn = MySQLdb.connect(
+        import pymysql.cursors
+        conn = pymysql.connect(
             host="Localhost", user="root", passwd="pass", db="Hospital")
-        cursor = conn.cursor()
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
     except ConnectionError:
         print("Unable to connect to database")
 
@@ -347,13 +391,37 @@ def view_Employees():
     cursor.execute(sql_createView)
     conn.commit()
 
-    conn.query("SELECT * FROM view_Employees")
-    r = conn.store_result()
-    Employees = r.fetch_row(maxrows=100, how=1)
+    cursor.execute("SELECT * FROM view_Employees")
+    r = cursor.fetchall()
 
     conn.rollback()
     conn.close()
-    return Employees
+    return r
+
+
+''' shows all patients '''
+
+
+def view_Patients():
+
+    try:
+        import pymysql.cursors
+        conn = pymysql.connect(
+            host="Localhost", user="root", passwd="pass", db="Hospital")
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+    except ConnectionError:
+        print("Unable to connect to database")
+
+    sql_createView = "CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Patient AS SELECT * FROM patient"
+    cursor.execute(sql_createView)
+    conn.commit()
+
+    cursor.execute("SELECT * FROM view_Patient")
+    r = cursor.fetchall()
+
+    conn.rollback()
+    conn.close()
+    return r
 
 
 #Test function
@@ -366,10 +434,10 @@ def view_Employees():
 def view_Departments():
 
     try:
-        import MySQLdb
-        conn = MySQLdb.connect(
+        import pymysql.cursors
+        conn = pymysql.connect(
             host="Localhost", user="root", passwd="pass", db="Hospital")
-        cursor = conn.cursor()
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
     except ConnectionError:
         print("Unable to connect to database")
 
@@ -377,13 +445,12 @@ def view_Departments():
     cursor.execute(sql_createView)
     conn.commit()
 
-    conn.query("SELECT * FROM view_Department")
-    r = conn.store_result()
-    Departments = r.fetch_row(maxrows=100, how=1)
+    cursor.execute("SELECT * FROM view_Department")
+    r = cursor.fetchall()
 
     conn.rollback()
     conn.close()
-    return Departments
+    return r
 
 
 #Test function
@@ -396,29 +463,25 @@ def view_Departments():
 def view_history(PatientID):
 
     try:
-        import MySQLdb
-        conn = MySQLdb.connect(
+        import pymysql.cursors
+        conn = pymysql.connect(
             host="Localhost", user="root", passwd="pass", db="Hospital")
-        cursor = conn.cursor()
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
     except ConnectionError:
         print("Unable to connect to database!")
 
-    try:
-        sql_view_history = (
-            """CREATE OR REPLACE ALGORITHM = MERGE VIEW view_history AS SELECT * FROM treatments join Patient ON PatientID WHERE PatientID = %s"""
-        )
-        cursor.execute(sql_view_history, [PatientID])
-        conn.commit()
-    except ViewCreationError:
-        print("View Creation failed!")
+    sql_view_history = (
+        """CREATE OR REPLACE ALGORITHM = MERGE VIEW view_history AS SELECT * FROM Treatments join patient ON PatientID WHERE PatientID = %s"""
+    )
+    cursor.execute(sql_view_history, [PatientID])
+    conn.commit()
 
-    conn.query("SELECT * FROM view_history")
-    r = conn.store_result()
-    Patient_history = r.fetch_row(maxrows=100, how=1)
+    cursor.execute("SELECT * FROM view_history")
+    r = cursor.fetchall()
 
     conn.rollback()
     conn.close()
-    return Patient_history
+    return r
 
 
 #Test function
@@ -431,10 +494,10 @@ def view_history(PatientID):
 def index_patientID():
 
     try:
-        import MySQLdb
-        conn = MySQLdb.connect(
+        import pymysql.cursors
+        conn = pymysql.connect(
             host="Localhost", user="root", passwd="pass", db="Hospital")
-        cursor = conn.cursor()
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
     except ConnectionError:
         print("Unable to connect to database")
 
