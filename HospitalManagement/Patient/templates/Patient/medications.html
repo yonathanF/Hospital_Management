@@ -67,19 +67,22 @@
 <table class="table thead-dark">
   <thead class="thead-dark">
     <tr>
+      <th scope="col">Treatment ID </th>
       <th scope="col">Medicine Name</th>
       <th scope="col">Prescribed By</th>
       <th scope="col">Prescription Date</th>
-      <th scope="col">Reason</th>
+      <th scope="col">Expected Outcome</th>
       <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
+    {% for treatment in treatments %}
     <tr>
-      <td>Lorem</td>
-          <td>ipsum</td>
-          <td>dolor</td>
-          <td>sit</td>
+      <td>{{ treatment.TreatmentID }}</td>
+      <td>{{ treatment.Ailment }}</td>
+      <td>{{ treatment.DoctorID }}</td>
+      <td>{{ treatment.PrescriptionDate }}</td>
+      <td>{{ treatment.ExpectedOutcome }}</td>
       <td>
           <a class="btn btn-info" href="/patient/drug_more" role ="button">
           More 
@@ -87,6 +90,7 @@
       </td>
 		  <!-- <td> <button class="btn btn-outline-primary"> More </button> </td> -->
     </tr>
+    {% endfor %}
      </tbody>
 </table>
    	      
