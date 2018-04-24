@@ -91,9 +91,9 @@
 	  {% for room in rooms %}
     <tr>
 	    <td>{{ room.RoomNumber}}</td>
-	    <td> {{ room.PatientID }}</td>
+	    <td> {{ room.FirstName}} {{room.LastName}}</td>
 	    <td>{{ room.Capacity }}</td>
-	    <td>{{ room.DepartmentID}}</td>
+	    <td>{{ room.DeptName}}</td>
     </tr>
     {% endfor %}
 

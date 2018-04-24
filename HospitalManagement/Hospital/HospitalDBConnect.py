@@ -160,6 +160,70 @@ def view_Appointments():
     return r
 
 
+def view_appt_count():
+    try:
+        import pymysql.cursors
+        conn = pymysql.connect(
+            host="Localhost", user="root", passwd="pass", db="Hospital")
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+    except ConnectionError:
+        print("Unable to connect to database")
+
+    sql_createView = "CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Appointment AS SELECT * FROM Appointment"
+    cursor.execute(sql_createView)
+    conn.commit()
+
+    cursor.execute(
+        "SELECT count(PatientID) from Appointment where ApptDate = CURDATE()")
+    r = cursor.fetchall()
+
+    conn.rollback()
+    conn.close()
+    return r
+
+
+def view_doc_count():
+    try:
+        import pymysql.cursors
+        conn = pymysql.connect(
+            host="Localhost", user="root", passwd="pass", db="Hospital")
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+    except ConnectionError:
+        print("Unable to connect to database")
+
+    sql_createView = "CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Appointment AS SELECT * FROM Appointment"
+    cursor.execute(sql_createView)
+    conn.commit()
+
+    cursor.execute("SELECT DISTINCT count(DocID)  from Doctor")
+    r = cursor.fetchall()
+
+    conn.rollback()
+    conn.close()
+    return r
+
+
+def view_room_count():
+    try:
+        import pymysql.cursors
+        conn = pymysql.connect(
+            host="Localhost", user="root", passwd="pass", db="Hospital")
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+    except ConnectionError:
+        print("Unable to connect to database")
+
+    sql_createView = "CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Appointment AS SELECT * FROM Appointment"
+    cursor.execute(sql_createView)
+    conn.commit()
+
+    cursor.execute("SELECT DISTINCT count(RoomNumber)  from Rooms")
+    r = cursor.fetchall()
+
+    conn.rollback()
+    conn.close()
+    return r
+
+
 "This block inserts Treatment into treatment record into database"
 
 
@@ -357,8 +421,9 @@ def view_Rooms():
     cursor.execute(sql_createView)
     conn.commit()
 
-    cursor.execute("SELECT * FROM view_Rooms")
-    cursor.execute("SELECT * FROM view_Rooms")
+    cursor.execute(
+        "select distinct FirstName, LastName, RoomNumber, Capacity, DeptName from (Rooms join patient on Rooms.PatientID=patient.PatientID) join Department on Department.DID=Rooms.DepartmentID;"
+    )
     r = cursor.fetchall()
 
     conn.rollback()

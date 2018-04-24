@@ -8,8 +8,21 @@ from .HospitalDBConnect import *
 def home(request):
     ''' the home for hosptial admins '''
 
+    appt_count = view_appt_count()
+    doc_count = view_doc_count()
+    room_count = view_room_count()
+
+    appt_count = appt_count[0]['count(PatientID)']
+    doc_count = doc_count[0]['count(DocID)']
+    room_count = room_count[0]['count(RoomNumber)']
+
+    context = {
+        "appt_count": appt_count,
+        'doc_count': doc_count,
+        'room_count': room_count
+    }
     # handle get only
-    return HttpResponse(render(request, 'Hosptial/home.html'))
+    return HttpResponse(render(request, 'Hosptial/home.html', context))
 
 
 def search(request):
@@ -82,7 +95,18 @@ def update_appointment(request, patient_id, doc_id):
     ''' handles appointments update '''
 
     # handle get
-    if request.method == 'GET':
+    if request.method == 'POST':
+        prefered_doctor = request.POST.get("preferedDoctor", "")
+        prefered_date = request.POST.get("preferedDate", "")
+        reason = request.POST.get("reason", "")
+
+        Update_Appointment(
+            int(patient_id), int(doc_id.strip('/')), int(prefered_doctor),
+            str(prefered_date), reason)
+        return redirect('/hosptial/appointments/')
+
+    else:
+
         # get old apt data and pass it as context
 
         # get all doctors
@@ -94,16 +118,6 @@ def update_appointment(request, patient_id, doc_id):
         }
         return HttpResponse(
             render(request, 'Hosptial/update_appt.html', context))
-
-    else:
-        prefered_doctor = request.post.get("prefereddoctor", "")
-        prefered_date = request.POST.get("preferedDate", "")
-        reason = request.POST.get("reason", "")
-
-        Update_Appointment(
-            int(patient_id), int(doc_id.strip('/')), int(prefered_doctor),
-            str(prefered_date), reason)
-        return redirect('/hosptial/appointments/')
 
 
 def patients(request):

@@ -87,7 +87,7 @@
                     <div class="card col-lg-3 homeInfo">
                         <h5 class="card-header">Number of Appt Today</h5>
                         <div class="card-body">
-                            <h2 class="card-title">123</h2>
+				<h2 class="card-title">{{appt_count}}</h2>
                             <p class="card-text">Scheduled for today</p>
                             <a href="/hosptial/appointments/" class="btn btn-block btn-primary">More</a>
                         </div>
@@ -96,7 +96,7 @@
                     <div class="col-lg-3 card homeInfo">
                         <h5 class="card-header">Number of Available Docs</h5>
                         <div class="card-body">
-                            <h2 class="card-title">200</h2>
+				<h2 class="card-title">{{ doc_count}}</h2>
                             <p class="card-text">Doctors providing care today</p>
                             <a href="/hosptial/doctors/" class="btn btn-block btn-primary">More</a>
                         </div>
@@ -105,7 +105,7 @@
                     <div class="col-lg-3 card homeInfo">
                         <h5 class="card-header">Number of Available rooms</h5>
                         <div class="card-body">
-                            <h2 class="card-title">50</h2>
+				<h2 class="card-title">{{ room_count}}</h2>
                             <p class="card-text">Open rooms today</p>
                             <a href="/hosptial/rooms/" class="btn btn-block btn-primary">More</a>
                         </div>
