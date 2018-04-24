@@ -68,7 +68,8 @@ def bills(request):
     ''' shows the user profile '''
 
     # also no posts, all get
-    all_bills = view_Bills()
+    PatientID = request.user.id
+    all_bills = view_Bill(PatientID)
     context = {'bills': all_bills}
     return HttpResponse(render(request, 'Patient/bills.html', context))
 
