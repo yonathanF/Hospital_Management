@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Patient| Appts</title>
+    <title>Admin| Appts</title>
 
     <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -73,9 +73,9 @@
 	  <div class="col-lg-7 card">
 		<h5 class="card-header">Old Appointment</h5>
 		<div class="card-body">
-			<h6 class="card-text">Prefered Doctor: </h6>
-		    <h6 class="card-text">Prefered Date: </h6>
-		    <p class="card-text">Reason: </p>
+			<h6 class="card-text"><b>Prefered Doctor:</b> {{docFirst}} {{docLast}} </h6>
+			<h6 class="card-text"><b> Prefered Date:</b> {{ lastDate }} </h6>
+			<p class="card-text"><b> Reason:</b> {{ reason}} </p>
 		</div>
 
 	  </div>
@@ -87,7 +87,7 @@
 	  <div class="card col-lg-7"> 
 
           <h5 class="card-header">Update Appointment</h5>
-    <form method="post" class="form-horizontal" action="/hosptial/new_appointments">
+	  <form method="post" class="form-horizontal" action="/hosptial/update_appointment/{{PatientID}}/{{DocID}}">
 
 <div class="card-body">
  {% csrf_token %}
@@ -95,13 +95,10 @@
 
 <div class="form-group">
     <label for="preferedDoctor">Prefered Doctor</label>
-    <select type="text" value="doc 8" class="form-control" id="preferedDoctor" name="preferedDoctor" required>
-	
-	    <option> doc 1 </option>
-	    <option> doc 2 </option>
-	    <option> doc 3 </option>
-	    <option> doc 4 </option>
-	    <option> doc 5 </option>
+    <select type="text"  class="form-control" id="preferedDoctor" name="preferedDoctor" required>
+	{% for doc in doctors %}	
+	<option value="{{doc.DocID }}"> {{doc.FirstName}} {{doc.LastName}} </option>
+	    {% endfor %}
     </select>
   </div>
 

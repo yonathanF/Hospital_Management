@@ -79,10 +79,10 @@
 
           <h5 class="card-header">Personal Information</h5>
 	  <div class="card-body">
-		  <h6 class="card-text"><b>First Name:</b> {{profile.FirstName }} </h6>
-		  <h6 class="card-text"><b> Last Name:</b> {{profile.LastName }} </h6>
-		  <h6 class="card-text"><b> Phone:</b> {{profile.Phone}}</h6>
-		  <h6 class="card-text"><b> Address:</b> {{profile.Address}} </h6>
+		  <h6 class="card-text"><b>First Name:</b> {{profile.0.FirstName }} </h6>
+		  <h6 class="card-text"><b> Last Name:</b> {{profile.0.LastName }} </h6>
+		  <h6 class="card-text"><b> Phone:</b> {{profile.0.Phone}}</h6>
+		  <h6 class="card-text"><b> Address:</b> {{profile.0.Address}} </h6>
 	  </div>
 	  </div>
 
@@ -90,10 +90,13 @@
 
           <h5 class="card-header">Medcial Information</h5>
 	  <div class="card-body">
-		  <h6 class="card-text"><b> Last Treatment:</b> {{profile.Ailment }} </h6>
-		  <h6 class="card-text"><b> Warning for Treatment:</b>  {{profile.Warnings}}</h6>
-		  <h6 class="card-text"><b> Expected Outcome:</b> {{profile.ExpectedOutcome }} </h6>
-		  <h6 class="card-text"><b> Prescription Date:</b> {{profile.PrescriptionDate}} </h6>
+		  {% for pro in profile %}
+		  <h6 class="card-text"><b> Treatment:</b> {{pro.Ailment }} </h6>
+		  <h6 class="card-text"><b> Warning for Treatment:</b>  {{pro.Warnings}}</h6>
+		  <h6 class="card-text"><b> Expected Outcome:</b> {{pro.ExpectedOutcome }} </h6>
+		  <h6 class="card-text"><b> Prescription Date:</b> {{pro.PrescriptionDate}} </h6>
+		  <hr>
+		  {% endfor %}
 	  </div>
 
 	  </div>
@@ -101,11 +104,11 @@
 	  </div>
 	  <div style="margin:7px; margin-left:30px" class="row">
 		  <div class="col-lg-4">
-     <a href="/hosptial/create_bill/1/" class="btn btn-block btn-primary"> Add Bill</a> 
+			  <a href="/hosptial/create_bill/{{profile.0.PatientID }}/" class="btn btn-block btn-primary"> Add Bill</a> 
 		  </div>
 
 <div class="col-lg-4">
-     <a href="/hosptial/treatment/1/" class="btn btn-block btn-warning"> Add Treatment</a> 
+	<a href="/hosptial/treatment/{{profile.0.PatientID }}/" class="btn btn-block btn-warning"> Add Treatment</a> 
 		  </div>
 	  </div>
  

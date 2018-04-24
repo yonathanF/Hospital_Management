@@ -85,15 +85,17 @@
       <th scope="col">Doctor Name </th>
       <th scope="col">Appointment Date</th>
       <th scope="col">Reason</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
 	  {% for appt in appts %}
     <tr>
-	    <td>{{ appt.PatientID }}</td>
+	    <td>{{ appt}}</td>
 	    <td>{{ appt.DocID }}</td>
 	    <td>{{ appt.ApptDate }}</td>
 	    <td>{{ appt.Reason }}</td>
+	    <td> <a href="/hosptial/update_appointment/{{ appt.PatientID }}/{{appt.DocID}}" class="btn btn-outline-success"> Update </a> </td>
     </tr>
 	    {% endfor %}
   </tbody>
