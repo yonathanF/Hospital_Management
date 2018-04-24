@@ -141,6 +141,23 @@ def doctors(request):
     return HttpResponse(render(request, 'Hosptial/doctors.html', context))
 
 
+def nurses(request):
+    ''' shows all doctors and their info '''
+
+    # get all the data
+    all_nurses = view_Nurses()
+    context = {'nurses': all_nurses}
+    return HttpResponse(render(request, 'Hosptial/nurses.html', context))
+
+def employees(request):
+    ''' shows all doctors and their info '''
+
+    # get all the data
+    all_employees = view_Employees()
+    context = {'employees': all_employees}
+    return HttpResponse(render(request, 'Hosptial/employees.html', context))
+
+
 def rooms(request):
     ''' shows info about rooms: handles get only '''
 

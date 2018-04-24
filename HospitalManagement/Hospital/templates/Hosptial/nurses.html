@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Admin| Patients</title>
+    <title>Admin| Nurses</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -39,10 +39,9 @@
                             </a>
                         </li>
 
-
                         <li class="nav-item">
                             <a class="nav-link" href="/hosptial/doctors/">
-                                <span data-feather="activity">(current)</span>Doctors 
+                                <span data-feather="activity"></span>Doctors 
                             </a>
                         </li>
                         <li class="nav-item">
@@ -62,7 +61,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/hosptial/bills">
-                                <span data-feather="mail"></span> Bills
+                                <span data-feather="mail">(current)</span> Bills
                             </a>
                         </li>
 
@@ -83,7 +82,7 @@
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Patients</h1>
+                    <h1 class="h2">All Nurses</h1>
                 </div>
 
                 <div class="row">
@@ -93,21 +92,21 @@
     <tr>
       <th scope="col">First name</th>
       <th scope="col">Last name</th>
-      <th scope="col">Phone</th>
       <th scope="col">Address</th>
-      <th scope="col">Last Appt</th>
-      <th scope="col"></th>
+      <th scope="col">Phone</th>
+      <th scope="col">Email</th>
+      <th scope="col">Salary</th>
     </tr>
   </thead>
   <tbody>
-	  {% for patient in patients %}
+	  {% for nurs in nurses %}
     <tr>
-	    <td>{{ patient.FirstName }}</td>
-	    <td>{{ patient.LastName }}</td>
-	    <td>{{ patient.Phone }}</td>
-	    <td>{{ patient.Address}}</td>
-	    <td> {{ patient.ApptDate }}</td>
-      <td> <a href="/hosptial/profile/{{ patient.PatientID }}/" class="btn btn-outline-primary"> More</a> </td>
+	    <td>{{ nurs.FirstName }}</td>
+	    <td>{{ nurs.LastName }}</td>
+	    <td>{{ nurs.Address }}</td>
+	    <td>{{ nurs.Phone }}</td>
+	    <td>{{ nurs.Email}}</td>
+	    <td>${{ nurs.Salary}}</td>
     </tr>
     {% endfor %}
   </tbody>
