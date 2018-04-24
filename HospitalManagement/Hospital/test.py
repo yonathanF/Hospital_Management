@@ -17,4 +17,8 @@ from HospitalDBConnect import *
 
 #print(view_Bill(103))
 
-print(Update_Appointment(101, 5, 5, '2018-05-31', 'test Reason'))
+#print(Update_Appointment(101, 5, 5, '2018-05-31', 'test Reason'))
+#DeleteBill(123)
+
+#InsertBill(104, '2018-04-25', 3092, 'some description', '2018-04-27')
+InsertTreatment('test sick', '2018-05-31', 'sick bars', 'might catch on fire')

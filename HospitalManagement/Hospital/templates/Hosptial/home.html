@@ -117,7 +117,7 @@
 		<hr>
 		<div class="card col-lg-12">
 			
-          <h6 class="card-header">Search by first name, last name, email. Any combination.</h6>
+          <h6 class="card-header">Search by first name, and last name. .</h6>
 	  <div class="card-body">
 <form action="/hosptial/search/" method="post">
  {% csrf_token %}
@@ -128,10 +128,7 @@
     <div class="col">
       <input type="text" name="lastName" class="form-control" placeholder="Last name">
     </div>
-    <div class="col">
-      <input type="email" name="email" class="form-control" placeholder="Email">
-    </div>
-
+    
   </div>
   </br>
   <div class="col-lg-4 float-right">

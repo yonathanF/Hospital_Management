@@ -163,8 +163,7 @@ def view_Appointments():
 "This block inserts Treatment into treatment record into database"
 
 
-def InsertTreatment(TreatmentID, Ailment, PrescriptionDate, ExpectedOutcome,
-                    warnings):
+def InsertTreatment(Ailment, PrescriptionDate, ExpectedOutcome, warnings):
     try:
         import pymysql.cursors
         conn = pymysql.connect(
@@ -173,9 +172,8 @@ def InsertTreatment(TreatmentID, Ailment, PrescriptionDate, ExpectedOutcome,
     except ConnectionError:
         print("Unable to connect to database")
 
-    sql_Insert = "INSERT INTO treatments (TreatmentID, Ailment, PrescriptionDate, ExpectedOutcome, warnings) VALUES (%s, %s, %s, %s, %s)"
-    TreatmentDetails = (TreatmentID, Ailment, PrescriptionDate,
-                        ExpectedOutcome, warnings)
+    sql_Insert = "INSERT INTO Treatments (Ailment, PrescriptionDate, ExpectedOutcome, warnings) VALUES (%s, %s, %s, %s)"
+    TreatmentDetails = (Ailment, PrescriptionDate, ExpectedOutcome, warnings)
     cursor.execute(sql_Insert, TreatmentDetails)
     conn.commit()
     conn.close()
@@ -188,8 +186,7 @@ def InsertTreatment(TreatmentID, Ailment, PrescriptionDate, ExpectedOutcome,
 "This block inserts Patient's Bills into Bills record into database"
 
 
-def InsertBill(PatientID, BillNumber, ReleaseDate, Amount, Description,
-               DueDate):
+def InsertBill(PatientID, ReleaseDate, Amount, Description, DueDate):
     try:
         import pymysql.cursors
         conn = pymysql.connect(
@@ -198,16 +195,15 @@ def InsertBill(PatientID, BillNumber, ReleaseDate, Amount, Description,
     except ConnectionError:
         print("Unable to connect to database")
 
-    sql_Insert = "INSERT INTO Bill (PatientID, BillNumber, ReleaseDate, Amount, Description, DueDate) VALUES (%s, %s, %s, %s, %s, %s)"
-    BillDetails = (PatientID, BillNumber, ReleaseDate, Amount, Description,
-                   DueDate)
+    sql_Insert = "INSERT INTO Bill (PatientID, ReleaseDate, Amount, Description, DueDate) VALUES (%s, %s, %s, %s, %s)"
+    BillDetails = (PatientID, ReleaseDate, Amount, Description, DueDate)
     cursor.execute(sql_Insert, BillDetails)
     conn.commit()
     conn.close()
 
 
 #Test function
-#InsertBill(172, 052, '2018-04-25', 50100, 'Treatment of stomach Pain', '2018-04-27')
+#insertbill(172, 052, '2018-04-25', 50100, 'treatment of stomach pain', '2018-04-27')
 ##############################################################################################################################
 
 "This block creates view of Patient's Bills"
@@ -253,7 +249,7 @@ def DeleteBill(BillNumber):
     except ConnectionError:
         print("Unable to connect to database")
 
-    sql_DeleteBill = ("DELETE FROM BILL WHERE BillNumber = %s" % BillNumber)
+    sql_DeleteBill = ("DELETE FROM Bill WHERE BillNumber = %s" % BillNumber)
     cursor.execute(sql_DeleteBill)
     conn.commit()
     conn.close()

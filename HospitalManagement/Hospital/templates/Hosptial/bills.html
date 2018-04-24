@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Patient| Bills</title>
+    <title>Admin| Bills</title>
 
     <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -74,6 +74,8 @@
     <tr>
       <th scope="col">Bill Number</th>
       <th scope="col">Due Date</th>
+      <th scope="col">Release Date</th>
+      <th scope="col">Description</th>
       <th scope="col">Amount</th>
       <th scope="col"></th>
     </tr>
@@ -83,11 +85,12 @@
     <tr>
 	    <td>{{ bill.BillNumber }}</td>
 	    <td>{{bill.DueDate }}</td>
+	    <td>{{bill.ReleaseDate}}</td>
+	    <td>{{bill.Description}}</td>
 	    <td>${{ bill.Amount}}</td>
-      <td>
-          <a class="btn btn-info" href="/patient/bills_more/{{ bill.BillNumber }}/" role ="button">
-          More 
-          </a>
+	    <td> <a href="/hosptial/delete_bill/{{ bill.BillNumber }}" class="btn btn-outline-danger" onclick="return confirm('This will delete this bill. Are you sure?')"> Delete Bill</a> </td>
+    </tr>
+
       </td>
     </tr>
     {% endfor %}

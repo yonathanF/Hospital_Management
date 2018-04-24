@@ -75,7 +75,7 @@
            
           <h5 class="card-header">Create a treatment plan</h5>
 	  <div class="card-body">
-		  <form method="post" class="form-horizontal" action="/hosptial/treatment/">
+		  <form method="post" class="form-horizontal" action="/hosptial/treatment/{{profile.PatientID}}/">
  {% csrf_token %}
 	</br>
   <div class="col-10">
@@ -84,7 +84,7 @@
     <label for="doctorName">Doctor Name</label>
     <select type="text" class="form-control" id="doctorName" name="doctorName" required>
 	{% for doctor in doctors %}	
-	<option> {{ doctor.FirstName}} {{doctor.LastName}} </option>
+	<option value="{{doctor.DocID}}"> {{ doctor.FirstName}} {{doctor.LastName}} </option>
 	{% endfor %}
 </select>
   </div>
@@ -128,9 +128,6 @@
 		  <h6 class="card-text"><b> Address:</b> {{profile.Address}} </h6>
 		<h6 class="card-text"><b> Last Treatment:</b> {{profile.Ailment }} </h6>
 		  <h6 class="card-text"><b> Warning for Treatment:</b>  {{profile.Warnings}}</h6>
-		    <h6 class="card-text">Last Visit: </h6>
-		    <h6 class="card-text">Last Doctor: </h6>
-		    <h6 class="card-text">Department: </h6>
 	  </div>
 	  </div>
 
