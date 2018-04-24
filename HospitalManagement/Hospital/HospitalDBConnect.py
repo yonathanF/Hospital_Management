@@ -88,7 +88,7 @@ def view_Appointment(PatientID):
     except ConnectionError:
         print("Unable to connect to database")
 
-    sql_createView = """CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Appointment AS SELECT PatientID, FirstName, ApptDate, Reason
+    sql_createView = """CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Appointment AS SELECT PatientID, patient.FirstName, patient.LastNamen, ApptDate, Reason
     FROM Appointment JOIN Doctor ON Doctor.DocID = Appointment.DocID WHERE PatientID = %s"""
     Patient = PatientID
     cursor.execute(sql_createView, [Patient])
