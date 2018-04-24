@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Admin| Rooms</title>
+    <title>Admin| Nurses</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -39,7 +39,6 @@
                             </a>
                         </li>
 
-
                         <li class="nav-item">
                             <a class="nav-link" href="/hosptial/doctors/">
                                 <span data-feather="activity"></span>Doctors 
@@ -62,13 +61,13 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/hosptial/bills">
-                                <span data-feather="mail"></span> Bills
+                                <span data-feather="mail">(current)</span> Bills
                             </a>
                         </li>
 
 			<li class="nav-item">
                             <a class="nav-link" href="/hosptial/rooms">
-                                <span data-feather="package">(current)</span>Rooms  
+                                <span data-feather="package"></span>Rooms  
                             </a>
                         </li>
 			<li class="nav-item">
@@ -83,7 +82,7 @@
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                    <h1 class="h2">All rooms</h1>
+                    <h1 class="h2">All Nurses</h1>
                 </div>
 
                 <div class="row">
@@ -91,22 +90,25 @@
 <table class="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">Room Number</th>
-      <th scope="col">Current Patient</th>
-      <th scope="col">Capacity</th>
-      <th scope="col">Department</th>
+      <th scope="col">First name</th>
+      <th scope="col">Last name</th>
+      <th scope="col">Address</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Email</th>
+      <th scope="col">Salary</th>
     </tr>
   </thead>
   <tbody>
-	  {% for room in rooms %}
+	  {% for nurs in nurses %}
     <tr>
-	    <td>{{ room.RoomNumber}}</td>
-	    <td> {{ room.FirstName}} {{room.LastName}}</td>
-	    <td>{{ room.Capacity }}</td>
-	    <td>{{ room.DeptName}}</td>
+	    <td>{{ nurs.FirstName }}</td>
+	    <td>{{ nurs.LastName }}</td>
+	    <td>{{ nurs.Address }}</td>
+	    <td>{{ nurs.Phone }}</td>
+	    <td>{{ nurs.Email}}</td>
+	    <td>${{ nurs.Salary}}</td>
     </tr>
     {% endfor %}
-
   </tbody>
 </table>
 
