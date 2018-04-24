@@ -96,7 +96,7 @@
 	    <td>{{ patient.LastName }}</td>
 	    <td>{{ patient.Phone }}</td>
 	    <td>{{ patient.Address}}</td>
-      <td> placeholder </td>
+	    <td> {{ patient.ApptDate }}</td>
       <td> <a href="/hosptial/profile/{{ patient.PatientID }}/" class="btn btn-outline-primary"> More</a> </td>
     </tr>
     {% endfor %}

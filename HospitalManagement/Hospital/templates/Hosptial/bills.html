@@ -73,6 +73,7 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col">Bill Number</th>
+      <th scope="col">Patient Name </th>
       <th scope="col">Due Date</th>
       <th scope="col">Release Date</th>
       <th scope="col">Description</th>
@@ -84,6 +85,7 @@
 	  {% for bill in bills %}
     <tr>
 	    <td>{{ bill.BillNumber }}</td>
+	    <td>{{bill.FirstName}} {{bill.LastName}}</td>
 	    <td>{{bill.DueDate }}</td>
 	    <td>{{bill.ReleaseDate}}</td>
 	    <td>{{bill.Description}}</td>

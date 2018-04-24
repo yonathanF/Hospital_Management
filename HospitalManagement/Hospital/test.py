@@ -21,4 +21,5 @@ from HospitalDBConnect import *
 #DeleteBill(123)
 
 #InsertBill(104, '2018-04-25', 3092, 'some description', '2018-04-27')
-InsertTreatment('test sick', '2018-05-31', 'sick bars', 'might catch on fire')
+#InsertTreatment('test sick', '2018-05-31', 'sick bars', 'might catch on fire')
+print(view_person_search_count("Brock", "Maile"))

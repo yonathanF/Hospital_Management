@@ -35,8 +35,11 @@ def search(request):
         first_name = request.POST.get("firstName", "")
         last_name = request.POST.get("lastName", "")
 
+        matching_patients = view_person_search_count(first_name, last_name)
+        context = {'patients': matching_patients}
+
         # reorganize data and pass as context
-        return HttpResponse(render(request, 'Hosptial/search.html'))
+        return HttpResponse(render(request, 'Hosptial/search.html', context))
 
     else:
         return HttpResponse(render(request, 'Hosptial/search.html'))

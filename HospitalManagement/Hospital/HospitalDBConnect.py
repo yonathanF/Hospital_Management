@@ -170,10 +170,6 @@ def view_appt_count():
     except ConnectionError:
         print("Unable to connect to database")
 
-    sql_createView = "CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Appointment AS SELECT * FROM Appointment"
-    cursor.execute(sql_createView)
-    conn.commit()
-
     cursor.execute(
         "SELECT count(PatientID) from Appointment where ApptDate = CURDATE()")
     r = cursor.fetchall()
@@ -192,11 +188,26 @@ def view_doc_count():
     except ConnectionError:
         print("Unable to connect to database")
 
-    sql_createView = "CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Appointment AS SELECT * FROM Appointment"
-    cursor.execute(sql_createView)
-    conn.commit()
-
     cursor.execute("SELECT DISTINCT count(DocID)  from Doctor")
+    r = cursor.fetchall()
+
+    conn.rollback()
+    conn.close()
+    return r
+
+
+def view_person_search_count(first_name, last_name):
+    try:
+        import pymysql.cursors
+        conn = pymysql.connect(
+            host="Localhost", user="root", passwd="pass", db="Hospital")
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+    except ConnectionError:
+        print("Unable to connect to database")
+
+    cursor.execute(
+        "SELECT * from patient where FirstName = %s or LastName = %s",
+        (first_name, last_name))
     r = cursor.fetchall()
 
     conn.rollback()
@@ -240,6 +251,7 @@ def InsertTreatment(Ailment, PrescriptionDate, ExpectedOutcome, warnings):
     sql_Insert = "INSERT INTO Treatments (Ailment, PrescriptionDate, ExpectedOutcome, warnings) VALUES (%s, %s, %s, %s)"
     TreatmentDetails = (Ailment, PrescriptionDate, ExpectedOutcome, warnings)
     cursor.execute(sql_Insert, TreatmentDetails)
+
     conn.commit()
     conn.close()
 
@@ -363,7 +375,8 @@ def view_Bills():
     except ConnectionError:
         print("Unable to connect to database")
 
-    sql_createView = "CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Bills AS SELECT * FROM Bill"
+    sql_createView = "CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Bills AS select patient.PatientID, BillNumber, ReleaseDate, Amount, Description, DueDate, FirstName, LastName from Bill join patient on patient.PatientID=Bill.PatientID"
+
     cursor.execute(sql_createView)
     conn.commit()
 
@@ -474,7 +487,7 @@ def view_Patients():
     except ConnectionError:
         print("Unable to connect to database")
 
-    sql_createView = "CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Patient AS SELECT * FROM patient"
+    sql_createView = "CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Patient AS select patient.PatientID, FirstName, LastName, Phone, Address, ApptDate from patient left join Appointment on patient.PatientID = Appointment.PatientID;"
     cursor.execute(sql_createView)
     conn.commit()
 
