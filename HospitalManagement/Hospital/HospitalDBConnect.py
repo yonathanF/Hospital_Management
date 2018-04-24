@@ -88,8 +88,9 @@ def view_Appointment(PatientID):
     except ConnectionError:
         print("Unable to connect to database")
 
-    sql_createView = """CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Appointment AS SELECT PatientID, patient.FirstName, patient.LastNamen, ApptDate, Reason
-    FROM Appointment JOIN Doctor ON Doctor.DocID = Appointment.DocID WHERE PatientID = %s"""
+    sql_createView = """CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Appointment AS
+SELECT PatientID, FirstName, LastName, Doctor.FirstName as docFirst, Doctor.LastName as docLast,ApptDate, Reason
+FROM Appointment JOIN Doctor ON Doctor.DocID = Appointment.DocID WHERE PatientID = %s"""
     Patient = PatientID
     cursor.execute(sql_createView, [Patient])
     conn.commit()
@@ -148,7 +149,7 @@ def view_Appointments():
     except ConnectionError:
         print("Unable to connect to database")
 
-    sql_createView = "CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Appointment AS SELECT * FROM Appointment"
+    sql_createView = "CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Appointment AS SELECT patient.PatientID, Doctor.DocID, patient.FirstName as FirstName, patient.LastName as LastName, Doctor.FirstName as docFirst, Doctor.LastName as docLast, ApptDate, Reason FROM (Appointment JOIN Doctor ON Doctor.DocID = Appointment.DocID) JOIN patient on Appointment.PatientID = patient.PatientID"
     cursor.execute(sql_createView)
     conn.commit()
 

@@ -91,8 +91,8 @@
   <tbody>
 	  {% for appt in appts %}
     <tr>
-	    <td>{{ appt}}</td>
-	    <td>{{ appt.DocID }}</td>
+	    <td>{{ appt.FirstName}} {{ appt.LastName}}</td>
+	    <td>{{ appt.docFirst }} {{ appt.docLast }}</td>
 	    <td>{{ appt.ApptDate }}</td>
 	    <td>{{ appt.Reason }}</td>
 	    <td> <a href="/hosptial/update_appointment/{{ appt.PatientID }}/{{appt.DocID}}" class="btn btn-outline-success"> Update </a> </td>
