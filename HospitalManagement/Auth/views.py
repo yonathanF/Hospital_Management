@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-
+from .HospitalDBConnect import *
 
 def register(request):
     ''' handles the registeration process '''
@@ -13,6 +13,8 @@ def register(request):
         first_name = request.POST.get("firstName", "")
         last_name = request.POST.get("lastName", "")
         email = request.POST.get("email", "")
+        address = request.POST.get("address", "")
+        phone = request.POST.get("phone", "")
         password = request.POST.get("password", "")
 
         try:
@@ -24,6 +26,8 @@ def register(request):
                 first_name=first_name,
                 last_name=last_name)
 
+            
+
         except:
             context[
                 'reg_error'] = "Something went wrong, we are trying to figure it out. Give us a min!"
@@ -33,6 +37,10 @@ def register(request):
         user = authenticate(username=email, password=password)
         if user is not None:
             login(request, user)
+
+            patientID = request.user.id
+            InsertPatient(patientID,first_name, last_name, phone, address)
+
             return redirect('/patient/home')
 
         # couldn't sign in

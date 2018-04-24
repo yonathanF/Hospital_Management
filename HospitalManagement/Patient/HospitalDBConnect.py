@@ -112,6 +112,41 @@ def view_Appointment(PatientID):
 #view_Appointment(172)
 #############################################################################################################################
 
+"This block creates view of Patient's appointments with doctors"
+
+
+def view_Treatment(PatientID):
+    try:
+        import pymysql.cursors
+        conn = pymysql.connect(
+            host="Localhost", user="root", passwd="pass", db="Hospital")
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+    except ConnectionError:
+        print("Unable to connect to database")
+
+    sql_createView = """CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Treatment AS SELECT Ailment, Warnings, PatientID, DocID, Treatments.TreatmentID, ExpectedOutcome, PrescriptionDate
+    FROM treat JOIN Treatments ON treat.TreatmentID = Treatments.TreatmentID WHERE PatientID = %s """
+    Patient = PatientID
+    cursor.execute(sql_createView, [Patient])
+    conn.commit()
+
+    sql_view = ("SELECT * FROM view_Treatment WHERE PatientID = %s")
+    cursor.execute(sql_view, [Patient])
+    values = cursor.fetchall()
+    # value = list(values[0])
+
+    # keys = ['Ailment', 'Warnings', 'PatientID', 'DocID', 'TreatmentID', 'ExpectedOutcome', 'PrescriptionDate']
+    # zipped = zip(keys, value)
+    # treatment_view = {}
+    # treatment_view = {k: v for k, v in zipped}
+    # conn.rollback()
+    # conn.close()
+    return values
+
+
+#Test function
+#view_Treatment(101)
+#############################################################################################################################
 "This block updates Appointment record"
 
 
@@ -159,6 +194,38 @@ def view_Appointments():
     conn.close()
     return r
 
+###########################################################################################################################
+"This block creates view of Patient's appointments"
+# Sonwoo 
+
+def view_Appointments_patient(PatientID):
+    try:
+        import pymysql.cursors
+        conn = pymysql.connect(
+            host="Localhost", user="root", passwd="pass", db="Hospital")
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+    except ConnectionError:
+        print("Unable to connect to database")
+
+    sql_createView = """CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Appointment AS SELECT *
+    FROM Appointment WHERE PatientID = %s"""
+    Patient = PatientID
+    cursor.execute(sql_createView, [Patient])
+    conn.commit()
+
+    sql_view = ("SELECT * FROM view_Appointment WHERE PatientID = %s")
+    cursor.execute(sql_view, [Patient])
+    r = cursor.fetchall()
+    if len(r) > 0:
+        conn.rollback()
+        conn.close()
+        return r
+    else: return {}
+
+
+#Test function
+#view_Appointment(172)
+###########################################################################################################################
 
 def view_appt_count():
     try:
