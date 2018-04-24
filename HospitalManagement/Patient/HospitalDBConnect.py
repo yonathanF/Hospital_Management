@@ -97,19 +97,90 @@ def view_Appointment(PatientID):
     sql_view = ("SELECT * FROM view_Appointment WHERE PatientID = %s")
     cursor.execute(sql_view, [Patient])
     values = cursor.fetchall()
-    value = list(values[0])
-
-    keys = ['PatientID', 'Doc_FirstName', 'ApptDate', 'Reason']
-    zipped = zip(keys, value)
-    Appt_view = {}
-    Appt_view = {k: v for k, v in zipped}
-    conn.rollback()
-    conn.close()
-    return Appt_view
+    if len(values) > 0:
+        value = list(values[0])
+        keys = ['PatientID', 'Doc_FirstName', 'ApptDate', 'Reason']
+        zipped = zip(keys, value)
+        Appt_view = {}
+        Appt_view = {k: v for k, v in zipped}
+        conn.rollback()
+        conn.close()
+        return Appt_view
+    else: return {}
 
 
 #Test function
 #view_Appointment(172)
+
+###########################################################################################################################
+"This block creates view of Patient's appointments"
+# Sonwoo 
+
+def view_Appointments_patient(PatientID):
+    try:
+        import pymysql.cursors
+        conn = pymysql.connect(
+            host="Localhost", user="root", passwd="pass", db="Hospital")
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+    except ConnectionError:
+        print("Unable to connect to database")
+
+    sql_createView = """CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Appointment AS SELECT *
+    FROM Appointment WHERE PatientID = %s"""
+    Patient = PatientID
+    cursor.execute(sql_createView, [Patient])
+    conn.commit()
+
+    sql_view = ("SELECT * FROM view_Appointment WHERE PatientID = %s")
+    cursor.execute(sql_view, [Patient])
+    r = cursor.fetchall()
+    if len(r) > 0:
+        conn.rollback()
+        conn.close()
+        return r
+    else: return {}
+
+
+#Test function
+#view_Appointment(172)
+
+###########################################################################################################################
+
+"This block creates view of Patient's appointments with doctors"
+
+
+def view_Treatment(PatientID):
+    try:
+        import pymysql.cursors
+        conn = pymysql.connect(
+            host="Localhost", user="root", passwd="pass", db="Hospital")
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+    except ConnectionError:
+        print("Unable to connect to database")
+
+    sql_createView = """CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Treatment AS SELECT Ailment, Warnings, PatientID, DocID, Treatments.TreatmentID, ExpectedOutcome, PrescriptionDate
+    FROM treat JOIN Treatments ON treat.TreatmentID = Treatments.TreatmentID WHERE PatientID = %s"""
+    Patient = PatientID
+    cursor.execute(sql_createView, [Patient])
+    conn.commit()
+
+    sql_view = ("SELECT * FROM view_Treatment WHERE PatientID = %s")
+    cursor.execute(sql_view, [Patient])
+    r = cursor.fetchall()
+    # values = cursor.fetchall()
+    # value = list(values[0])
+
+    # keys = ['Ailment', 'Warnings', 'PatientID', 'DocID', 'TreatmentID', 'ExpectedOutcome', 'PrescriptionDate']
+    # zipped = zip(keys, value)
+    # treatment_view = {}
+    # treatment_view = {k: v for k, v in zipped}
+    # conn.rollback()
+    # conn.close()
+    return r
+
+
+#Test function
+#view_Treatment(101)
 #############################################################################################################################
 
 "This block updates Appointment record"
@@ -240,6 +311,60 @@ def view_Bill(PatientID):
 #Test function
 #view_Bill(172)
 ############################################################################################################################
+def view_Bill_more(BillNumber):
+
+    try:
+        import pymysql.cursors
+        conn = pymysql.connect(
+            host="Localhost", user="root", passwd="pass", db="Hospital")
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+    except ConnectionError:
+        print("Unable to connect to database")
+
+    sql_createView = """CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Bills AS SELECT PatientID, BillNumber, ReleaseDate, Amount, Description, DueDate
+    FROM Bill WHERE BillNumber = %s"""
+    cursor.execute(sql_createView, [BillNumber])
+    conn.commit()
+
+    cursor.execute("SELECT * FROM view_Bills WHERE BillNumber = %s" % BillNumber)
+    r = cursor.fetchall()
+
+    conn.rollback()
+    conn.close()
+    return r
+
+
+#Test function
+#view_Bill(172)
+############################################################################################################################
+
+def view_Treatment_more(treatmentNumber):
+
+    try:
+        import pymysql.cursors
+        conn = pymysql.connect(
+            host="Localhost", user="root", passwd="pass", db="Hospital")
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+    except ConnectionError:
+        print("Unable to connect to database")
+
+    sql_createView = """CREATE OR REPLACE ALGORITHM = MERGE VIEW view_treatment_more AS SELECT Ailment, Warnings, PatientID, DocID, Treatments.TreatmentID, ExpectedOutcome, PrescriptionDate
+    FROM treat JOIN Treatments ON treat.TreatmentID = Treatments.TreatmentID WHERE treat.TreatmentID = %s"""
+    cursor.execute(sql_createView, [treatmentNumber])
+    conn.commit()
+
+    cursor.execute("SELECT * FROM view_treatment_more WHERE TreatmentID = %s" % treatmentNumber)
+    r = cursor.fetchall()
+
+    conn.rollback()
+    conn.close()
+    return r
+
+
+#Test function
+#view_Bill(172)
+############################################################################################################################
+
 
 "This block Delete bills of Patientss"
 

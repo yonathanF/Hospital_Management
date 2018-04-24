@@ -55,7 +55,7 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-		  <h1 class="h2">Welcome, {{ username }}</h1>
+		  <!-- <h1 class="h2">Welcome, {{ username }}</h1> -->
           </div>
 
 	
@@ -67,26 +67,30 @@
 <table class="table thead-dark">
   <thead class="thead-dark">
     <tr>
+      <th scope="col">Treatment ID </th>
       <th scope="col">Medicine Name</th>
       <th scope="col">Prescribed By</th>
       <th scope="col">Prescription Date</th>
-      <th scope="col">Reason</th>
+      <!-- <th scope="col">Expected Outcome</th> -->
       <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
+    {% for treatment in treatments %}
     <tr>
-      <td>Lorem</td>
-          <td>ipsum</td>
-          <td>dolor</td>
-          <td>sit</td>
+      <td>{{ treatment.TreatmentID }}</td>
+      <td>{{ treatment.Ailment }}</td>
+      <td>{{ treatment.DocID }}</td>
+      <td>{{ treatment.PrescriptionDate }}</td>
+      <!-- <td>{{ treatment.ExpectedOutcome }}</td> -->
       <td>
-          <a class="btn btn-info" href="/patient/drug_more" role ="button">
+          <a class="btn btn-info" href="/patient/drug_more/{{ treatment.TreatmentID }}" role ="button">
           More 
           </a>
       </td>
 		  <!-- <td> <button class="btn btn-outline-primary"> More </button> </td> -->
     </tr>
+    {% endfor %}
      </tbody>
 </table>
    	      

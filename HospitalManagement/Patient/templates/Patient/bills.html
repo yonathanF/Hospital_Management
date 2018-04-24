@@ -55,7 +55,7 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-		  <h1 class="h2">Welcome, {{ username }}</h1>
+		  <!-- <h1 class="h2">Welcome, {{ username }}</h1> -->
           </div>
 	  <h2> Your Bills </h2>
 <table class="table">
@@ -68,17 +68,19 @@
     </tr>
   </thead>
   <tbody>
+    {% for bill in bills %}
     <tr>
-      <td>1234</td>
-      <td>10/12/2018</td>
-      <td>$500</td>
+      <td>{{ bill.BillNumber }}</td>
+      <td>{{bill.DueDate }}</td>
+      <td>${{ bill.Amount}}</td>
       <td>
-          <a class="btn btn-info" href="/patient/bills_more" role ="button">
+          <a class="btn btn-info" href="/patient/bills_more/{{ bill.BillNumber }}/" role ="button">
           More 
           </a>
       </td>
       <!-- <td> <button class="btn btn-outline-primary"> More </button> </td> -->
     </tr>
+    {% endfor %}
   </tbody>
 </table>
 

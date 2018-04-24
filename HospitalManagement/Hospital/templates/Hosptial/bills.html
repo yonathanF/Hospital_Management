@@ -84,7 +84,11 @@
 	    <td>{{ bill.BillNumber }}</td>
 	    <td>{{bill.DueDate }}</td>
 	    <td>${{ bill.Amount}}</td>
-      <td> <button class="btn btn-outline-primary"> More </button></td>
+      <td>
+          <a class="btn btn-info" href="/patient/bills_more/{{ bill.BillNumber }}/" role ="button">
+          More 
+          </a>
+      </td>
     </tr>
     {% endfor %}
   </tbody>
