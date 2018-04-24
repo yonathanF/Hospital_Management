@@ -115,7 +115,7 @@ def view_Appointment(PatientID):
 "This block updates Appointment record"
 
 
-def Update_Appointment(PatientID, NewDocID, NewApptDate):
+def Update_Appointment(PatientID, OldDocID, NewDocID, NewApptDate, Reason):
     try:
         import pymysql.cursors
         conn = pymysql.connect(
@@ -124,9 +124,9 @@ def Update_Appointment(PatientID, NewDocID, NewApptDate):
     except ConnectionError:
         print("Unable to connect to database")
 
-    Appt_Details = (NewDocID, NewApptDate, PatientID)
+    Appt_Details = (NewDocID, NewApptDate, Reason, PatientID, OldDocID)
     sql_UpdateAppt = (
-        "UPDATE Appointment SET DocID = %s, ApptDate = %s WHERE PatientID = %s"
+        "UPDATE Appointment SET DocID = %s, ApptDate = %s, Reason = %s WHERE PatientID = %s AND DocID = %s"
     )
     cursor.execute(sql_UpdateAppt, Appt_Details)
     conn.commit()

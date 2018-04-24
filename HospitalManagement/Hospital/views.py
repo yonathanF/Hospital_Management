@@ -103,7 +103,12 @@ def update_appointment(request, patient_id, doc_id):
 
     else:
         prefered_doctor = request.POST.get("preferedDoctor", "")
-        print(prefered_doctor)
+        prefered_date = request.POST.get("preferedDate", "")
+        reason = request.POST.get("reason", "")
+
+        Update_Appointment(
+            int(patient_id), int(doc_id.strip('/')), int(prefered_doctor),
+            str(prefered_date), reason)
         return redirect('/hosptial/appointments/')
 
 
