@@ -71,7 +71,17 @@ def treatment(request, patient_id):
         redirect('/hosptial/profile/' + patient_id)
 
     else:
-        return HttpResponse(render(request, 'Hosptial/create_treatment.html'))
+        # get profile data for side display
+        patient_profile = view_history(patient_id)
+
+        # get all doctors
+        all_doctors = view_Doctors()
+
+        # set context
+        context = {"profile": patient_profile[0], "doctors": all_doctors}
+
+        return HttpResponse(
+            render(request, 'Hosptial/create_treatment.html', context))
 
 
 def update_appointment(request, patient_id, doc_id):
@@ -80,11 +90,21 @@ def update_appointment(request, patient_id, doc_id):
     # handle get
     if request.method == 'GET':
         # get old apt data and pass it as context
-        return HttpResponse(render(request, 'Hosptial/update_appt.html'))
+
+        # get all doctors
+        all_doctors = view_Doctors()
+        context = {
+            'doctors': all_doctors,
+            'PatientID': patient_id,
+            'DocID': doc_id
+        }
+        return HttpResponse(
+            render(request, 'Hosptial/update_appt.html', context))
 
     else:
-        prefered_doctor = request.POST.get("firstName", "")
-        return HttpResponse(render(request, 'Hosptial/update_appt.html'))
+        prefered_doctor = request.POST.get("preferedDoctor", "")
+        print(prefered_doctor)
+        return redirect('/hosptial/appointments/')
 
 
 def patients(request):
