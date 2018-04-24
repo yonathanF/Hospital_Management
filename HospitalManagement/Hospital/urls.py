@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^/nurses', views.nurses, name='nurses'),
     url(r'^/employees', views.employees, name='employees'),
     url(r'^/rooms', views.rooms, name='rooms'),
+    url(r'^/bills_more/(?P<billNumber>[0-9]+)/$', views.bills_more, name='bills_more'),
     url(r'^/bills', views.bills, name='bills'),
     url(r'^/departments', views.departments, name='departments'),
     url(r'^/create_bill/(?P<patient_id>[0-9]+)/$',

@@ -181,9 +181,17 @@ def bills(request):
     # get all the data
     all_bills = view_Bills()
     context = {'bills': all_bills}
+    # print(context)
 
     return HttpResponse(render(request, 'Hosptial/bills.html', context))
 
+def bills_more(request, billNumber):
+    ''' shows the user profile '''
+    all_bills = view_Bill_more(billNumber)
+    # print (all_bills)
+    context = {'bill': all_bills[0]}
+    print(context)
+    return HttpResponse(render(request, 'Hosptial/bills_more.html', context))
 
 def create_bill(request, patient_id):
     ''' handles the view and creation of bills '''

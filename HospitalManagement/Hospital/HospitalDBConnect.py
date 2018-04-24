@@ -302,6 +302,33 @@ def view_Bill(PatientID):
 #view_Bill(172)
 ############################################################################################################################
 
+def view_Bill_more(BillNumber):
+
+    try:
+        import pymysql.cursors
+        conn = pymysql.connect(
+            host="Localhost", user="root", passwd="pass", db="Hospital")
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+    except ConnectionError:
+        print("Unable to connect to database")
+
+    sql_createView = """CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Bills AS SELECT PatientID, BillNumber, ReleaseDate, Amount, Description, DueDate
+    FROM Bill WHERE BillNumber = %s"""
+    cursor.execute(sql_createView, [BillNumber])
+    conn.commit()
+
+    cursor.execute("SELECT * FROM view_Bills WHERE BillNumber = %s" % BillNumber)
+    r = cursor.fetchall()
+
+    conn.rollback()
+    conn.close()
+    return r
+
+
+#Test function
+#view_Bill(172)
+############################################################################################################################
+
 "This block Delete bills of Patientss"
 
 
