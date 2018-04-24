@@ -4,14 +4,16 @@ from django.shortcuts import redirect, render
 
 from .HospitalDBConnect import *
 
+
 def home(request):
     ''' a patient private home page '''
     context = {}
     context['username'] = request.user.first_name
     context['user_id'] = request.user.id
-    context['fullname'] = request.user.first_name + " " +  request.user.last_name
+    context[
+        'fullname'] = request.user.first_name + " " + request.user.last_name
     context['email'] = request.user.email
-    if  request.user.is_staff:
+    if request.user.is_staff:
         context['type'] = "Staff"
     else:
         context['type'] = "Patient"
@@ -38,11 +40,16 @@ def new_appointments(request):
         Date = request.POST.get("preferedDate", "")
         Reason = request.POST.get("reason", "")
         InsertAppt(PatientID, DocID, Date, Reason)
-        #TODO insert into db
         return redirect("/patient/appointments/")
 
     else:
-        return HttpResponse(render(request, 'Patient/new_appt.html'))
+
+        all_doctors = view_Doctors()
+        context = {
+            'doctors': all_doctors,
+        }
+
+        return HttpResponse(render(request, 'Patient/new_appt.html', context))
 
 
 def medications(request):
@@ -53,6 +60,7 @@ def medications(request):
 
     # no post, handle all as get
     return HttpResponse(render(request, 'Patient/medications.html', context))
+
 
 def drug_more(request, treatmentNumber):
     ''' mediations info page'''
@@ -72,6 +80,7 @@ def bills(request):
     all_bills = view_Bill(PatientID)
     context = {'bills': all_bills}
     return HttpResponse(render(request, 'Patient/bills.html', context))
+
 
 def bills_more(request, billNumber):
     ''' shows the user profile '''

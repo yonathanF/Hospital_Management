@@ -70,12 +70,10 @@
 <div class="form-group">
     <label for="preferedDoctor">Prefered Doctor</label>
     <select type="text" class="form-control" id="preferedDoctor" name="preferedDoctor" required>
-	
-	    <option> doc 1 </option>
-	    <option> doc 2 </option>
-	    <option> doc 3 </option>
-	    <option> doc 4 </option>
-	    <option> doc 5 </option>
+		{% for doc in doctors %}	
+	<option value="{{doc.DocID }}"> {{doc.FirstName}} {{doc.LastName}} </option>
+	    {% endfor %}
+ 
     </select>
   </div>
 
