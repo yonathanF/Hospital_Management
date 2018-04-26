@@ -2,7 +2,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
+
 from .HospitalDBConnect import *
+
 
 def register(request):
     ''' handles the registeration process '''
@@ -26,8 +28,6 @@ def register(request):
                 first_name=first_name,
                 last_name=last_name)
 
-            
-
         except:
             context[
                 'reg_error'] = "Something went wrong, we are trying to figure it out. Give us a min!"
@@ -39,7 +39,7 @@ def register(request):
             login(request, user)
 
             patientID = request.user.id
-            InsertPatient(patientID,first_name, last_name, phone, address)
+            InsertPatient(patientID, first_name, last_name, phone, address)
 
             return redirect('/patient/home')
 
@@ -63,17 +63,19 @@ def signin(request):
         email = request.POST.get("email", "")
         password = request.POST.get("password", "")
 
-        user = authenticate(username=email, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('/patient/home')
-
-            # bad creds
-            context['reg_error'] = "Wrong email and/or password. Try again!"
-            return HttpResponse(render(request, 'Auth/signin.html', context))
-
         try:
-            pass
+            user = authenticate(username=email, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('/patient/home')
+
+                # bad creds
+                context[
+                    'reg_error'] = "Wrong email and/or password. Try again!"
+                return HttpResponse(
+                    render(request, 'Auth/signin.html', context))
+            else:
+                raise Exception
         except:
             context[
                 'reg_error'] = "Doesn't seem like we have seen you before. Try registering first!"
