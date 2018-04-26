@@ -24,7 +24,7 @@ def appointments(request):
     ''' handles the creation and display of appts '''
     PatientID = request.user.id
     all_appointments = view_Appointments_patient(PatientID)
-    print(all_appointments)
+    # print(all_appointments)
     context = {'appts': all_appointments}
 
     return HttpResponse(render(request, 'Patient/appt.html', context))

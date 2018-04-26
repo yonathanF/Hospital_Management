@@ -46,7 +46,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/hosptial/employees/">
-                                <span data-feather="paperclip"></span>Employees 
+                                <span data-feather="paperclip"></span>Employees
                             </a>
                         </li>
                         <li class="nav-item">
@@ -78,41 +78,39 @@
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
           </div>
-	  <h2> All Bills </h2>
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Bill Number</th>
-      <th scope="col">Patient Name </th>
-      <th scope="col">Due Date</th>
-      <th scope="col">Release Date</th>
-      <th scope="col">Description</th>
-      <th scope="col">Amount</th>
-      <th scope="col" style="width:80px"></th>
-      <th scope="col" style="width:100px"></th>
-    </tr>
-  </thead>
-  <tbody>
-	  {% for bill in bills %}
-    <tr>
-	    <td>{{ bill.BillNumber }}</td>
-	    <td>{{bill.FirstName}} {{bill.LastName}}</td>
-	    <td>{{bill.DueDate }}</td>
-	    <td>{{bill.ReleaseDate}}</td>
-	    <td>{{bill.Description}}</td>
-	    <td>${{ bill.Amount}}</td>
-      <td>
-          <a class="btn btn-info" href="/hosptial/bills_more/{{ bill.BillNumber }}/" role ="button">
-          More
-          </a>
-      </td>
-	    <td> <a href="/hosptial/delete_bill/{{ bill.BillNumber }}" class="btn btn-outline-danger" onclick="return confirm('This will delete this bill. Are you sure?')"> Delete Bill</a> </td>
-    </tr>
+	  <div class="row">
+      <div class="container-fluid">
+          <h2>
+            <span>
+            Your Bill: {{bill.BillNumber}}
+            </span>
+            <a class="btn btn-primary float-right" href="/patient/bills" role ="button"> Back  </a>
+          </h2> 
+      </div>
 
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
+<table class="table">
+    <tbody>
+        <tr>
+          <th style="width:200px">Bill Number</th>
+            <td>{{bill.BillNumber}} </td>
+        </tr>
+        <tr>
+          <th>Due Date</th>
+            <td>{{bill.DueDate}}</td>
+        </tr>
+        <tr>
+          <th>Release Date</th>
+            <td>{{bill.ReleaseDate}}</td>
+        </tr>
+      <tr>
+          <th>Amount</th>
+            <td>{{bill.Amount}}</td>
+        </tr>
+      <tr>
+          <th>Description</th>
+          <td>{{bill.Description}}</td>
+        </tr>
+    </tbody>
 </table>
 
 

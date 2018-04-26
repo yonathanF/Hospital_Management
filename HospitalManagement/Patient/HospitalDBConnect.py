@@ -147,6 +147,34 @@ def view_Treatment(PatientID):
 #Test function
 #view_Treatment(101)
 #############################################################################################################################
+
+def view_Treatment_more(treatmentNumber):
+
+    try:
+        import pymysql.cursors
+        conn = pymysql.connect(
+            host="Localhost", user="root", passwd="pass", db="Hospital")
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+    except ConnectionError:
+        print("Unable to connect to database")
+
+    sql_createView = """CREATE OR REPLACE ALGORITHM = MERGE VIEW view_treatment_more AS SELECT Ailment, Warnings, PatientID, DocID, Treatments.TreatmentID, ExpectedOutcome, PrescriptionDate
+    FROM treat JOIN Treatments ON treat.TreatmentID = Treatments.TreatmentID WHERE treat.TreatmentID = %s"""
+    cursor.execute(sql_createView, [treatmentNumber])
+    conn.commit()
+
+    cursor.execute("SELECT * FROM view_treatment_more WHERE TreatmentID = %s" % treatmentNumber)
+    r = cursor.fetchall()
+
+    conn.rollback()
+    conn.close()
+    return r
+
+
+#Test function
+#view_Bill(172)
+############################################################################################################################
+
 "This block updates Appointment record"
 
 
@@ -367,6 +395,33 @@ def view_Bill(PatientID):
 #Test function
 #view_Bill(172)
 ############################################################################################################################
+def view_Bill_more(BillNumber):
+
+    try:
+        import pymysql.cursors
+        conn = pymysql.connect(
+            host="Localhost", user="root", passwd="pass", db="Hospital")
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+    except ConnectionError:
+        print("Unable to connect to database")
+
+    sql_createView = """CREATE OR REPLACE ALGORITHM = MERGE VIEW view_Bills AS SELECT PatientID, BillNumber, ReleaseDate, Amount, Description, DueDate
+    FROM Bill WHERE BillNumber = %s"""
+    cursor.execute(sql_createView, [BillNumber])
+    conn.commit()
+
+    cursor.execute("SELECT * FROM view_Bills WHERE BillNumber = %s" % BillNumber)
+    r = cursor.fetchall()
+
+    conn.rollback()
+    conn.close()
+    return r
+
+
+#Test function
+#view_Bill(172)
+############################################################################################################################
+
 
 "This block Delete bills of Patientss"
 
